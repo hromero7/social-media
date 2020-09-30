@@ -1,8 +1,15 @@
 import React from 'react';
+import "./Login.css";
+import Icon from "../pages/assets/bugIcon.png";
 
 const Login = () => {
     return(
-        <div>
+        <div className="container loginPage">
+            <h1 className="socialTitle">Social<span className="subtitle">Bug</span>
+            {/* <i className="fas fa-bug"></i> */}
+            <img className="bugIcon" src={Icon} alt=""/>
+            </h1>
+            
             <form>
             <div className="form-group">
             <label for="exampleInputEmail1">Email address</label>
@@ -18,6 +25,7 @@ const Login = () => {
             <label className="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
   <button type="submit" className="btn btn-primary">Submit</button>
+  <a href="/register">Register a new account</a>
 </form>
         </div>
     )
