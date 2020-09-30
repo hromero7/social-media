@@ -1,0 +1,21 @@
+html, body {
+    background-color: #fafaf6;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.loginPage {
+    margin-top: 20px;
+}
+
+/*Heading*/
+.socialTitle {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: #3d6cb9;
+}
+.subtitle {
+    color: #61dafb;
+}
+.bugIcon {
+    width:57px;
+}
