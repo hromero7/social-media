@@ -15,3 +15,9 @@
 .login-link {
     margin-top: 20px;
 }
+
+@media screen and (max-width:768px) {
+    .signup-form {
+        width: 100%;
+    }
+}

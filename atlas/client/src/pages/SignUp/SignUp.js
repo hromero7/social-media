@@ -21,8 +21,12 @@ const SignUp = () => {
     <input type="text" className="form-control" id="lastName" aria-describedby="emailHelp"/>
   </div>
   <div className="form-group">
-    <label for="exampleInputEmail1">Email address</label>
+    <label for="exampleInputEmail1">Email</label>
     <input type="email" className="form-control" id="email" aria-describedby="emailHelp"/>
+  </div>
+  <div className="form-group">
+    <label for="lastName">Username</label>
+    <input type="text" className="form-control" id="username" aria-describedby="emailHelp"/>
   </div>
   <div className="form-group">
     <label for="exampleInputPassword1">Password</label>
