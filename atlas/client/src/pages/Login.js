@@ -10,7 +10,7 @@ const Login = () => {
             <img className="bugIcon" src={Icon} alt=""/>
             </h1>
             
-            <form>
+            <form className="loginForm">
             <div className="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
@@ -24,8 +24,8 @@ const Login = () => {
             <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
             <label className="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
-  <button type="submit" className="btn btn-primary">Submit</button>
-  <a href="/register">Register a new account</a>
+  <button type="submit" className="btn btn-primary">Login</button> or 
+  <a href="/register"> Register a new account</a>
 </form>
         </div>
     )
