@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Login.css";
-import Icon from "../pages/assets/bugIcon.png";
+import Icon from "../assets/bugIcon.png";
 
 const Login = () => {
     return(
@@ -25,7 +25,7 @@ const Login = () => {
             <label className="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
   <button type="submit" className="btn btn-primary">Login</button> or 
-  <a href="/register"> Register a new account</a>
+  <a href="/signup"> Register a new account</a>
 </form>
         </div>
     )
