@@ -2,11 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
+const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 3001;
 require("dotenv").config();
 const app = express();
 
 app.use(cors());
+app.use(cookieParser());
 
 
 // const uri = process.env.ATLAS_URI;
@@ -30,7 +32,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //Define API Routes here
-const userRouter = require("./routes/API");
+const userRouter = require("./routes/user");
 app.use("/user", userRouter);
 
 app.get("*", (req, res) => {
