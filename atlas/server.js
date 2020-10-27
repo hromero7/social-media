@@ -33,7 +33,10 @@ if (process.env.NODE_ENV === "production") {
 
 //Define API Routes here
 const userRouter = require("./routes/user");
+const postRouter = require("./routes/postAPI");
+
 app.use("/user", userRouter);
+app.use("/view", postRouter);
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
