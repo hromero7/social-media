@@ -25,7 +25,8 @@ username: {
 password: {
     type: String,
     required: true
-}
+},
+posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}]
 });
 
 UserSchema.pre("save", function(next) {
