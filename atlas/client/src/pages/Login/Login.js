@@ -1,8 +1,44 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import UserAPI from "../../utils/UserAPI";
+import { AuthContext } from "../../context/AuthContext";
 import "./Login.css";
 import Icon from "../assets/bugIcon.png";
 
 const Login = () => {
+    const [user, setUser] = useState({ username: "", password: "" });
+    const authContext = useContext(AuthContext);
+    const [invalidCredentials, setInvalidCredentials] = useState(false);
+    const handleChange = (e) => {
+        e.preventDefault();
+        setUser({...user, [e.target.name] : e.target.value });
+
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        UserAPI.login(user).then(data => {
+            console.log(data)
+          const { isAuthenticated, user } = data;
+          console.log(isAuthenticated)
+          if (isAuthenticated) {
+              authContext.setUser(user);
+              authContext.setIsAuthenticated(isAuthenticated);
+            //   window.location.replace("/dashboard");
+          } else {
+              console.log("hello")
+              setInvalidCredentials(true);
+          }
+        });
+    }
+    
+    const renderWarningMsg = () => {
+        return (
+            <div class="alert alert-danger" role="alert">
+                Please Enter Valid Credentials!
+            </div>
+        )
+    }
+
     return(
         <div className="container loginPage">
             <h1 className="socialTitle">Social<span className="subtitle">Bug</span>
@@ -10,15 +46,16 @@ const Login = () => {
             <img className="bugIcon" src={Icon} alt=""/>
             </h1>
             
-            <form className="loginForm">
+            <form className="loginForm" onSubmit={handleSubmit}>
+                {invalidCredentials === true ? renderWarningMsg() : null }
             <div className="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+            <label for="exampleInputEmail1">Username</label>
+            <input type="text" className="form-control" name="username" onChange={handleChange}/>
             <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
             <div className="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" className="form-control" id="exampleInputPassword1"/>
+            <input type="password" className="form-control" name="password" onChange={handleChange}/>
         </div>
             <div className="form-group form-check">
             <input type="checkbox" className="form-check-input" id="exampleCheck1"/>

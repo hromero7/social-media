@@ -1,0 +1,51 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: left;
+    align-items: left;
+    margin-top: 35px;
+}
+
+.feed {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.card {
+    width: 350px;
+    height: 500px;
+    padding: 20px;
+}
+
+.profile-card-top {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.card-body {
+    text-align: center;
+    
+}
+.card-body span {
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+/***** Tweet Card CSS *******/
+
+.tweet-card {
+    width: 100%;
+    height: 200px;
+}
+
+.tweet-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.card-body {
+    text-align: left;
+}
