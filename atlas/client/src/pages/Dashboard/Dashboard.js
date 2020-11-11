@@ -1,9 +1,24 @@
 import React from "react";
+import ProfileCard from "../../components/ProfileCard";
+import TweetCard from "../../components/TweetCard";
+import "./Dashboard.css";
 
 const Dashboard = () => {
     return (
+        <div className="container dashboard">
+        
         <div>
-            Welcome to Social Bug!
+            <ProfileCard/>
+        </div>
+        
+        <div className="feed">
+            <TweetCard/>
+            <TweetCard/>
+            <TweetCard/>
+            <TweetCard/>
+            <TweetCard/>
+        </div>
+
         </div>
     )
 

@@ -1,6 +1,49 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import UserAPI from "../utils/UserAPI";
+import { AuthContext } from "../context/AuthContext";
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
+
+  const logoutHandler = () => {
+    UserAPI.logout().then(data => {
+      if (data.success) {
+        setUser(data.user)
+        setIsAuthenticated(false);
+      }
+    });
+  }
+
+  //Nav items that will populate when user is not logged in
+  const unauthenticatedNavBar = () => {
+    return (
+        <div className="navbar-nav">
+          <Link to="/">
+            <a className="nav-link active" href="#">Login <span className="sr-only">(current)</span></a>
+          </Link>
+          <Link to="/signup">
+            <a className="nav-link" href="#">Sign Up</a>
+          </Link>
+        </div>
+    );
+  };
+
+  //Nav items that will populate when user is logged in
+  const authenticatedNavBar = () => {
+    return (
+    <div className="navbar-nav">
+          <Link to="/">
+            <a className="nav-link active" href="#">Login <span className="sr-only">(current)</span></a>
+          </Link>
+          <Link to="/dashboard">
+            <a className="nav-link" href="#">Dashboard</a>
+          </Link>
+          <button className="btn btn-primary" onClick={logoutHandler()}>Logout</button>
+        </div>
+    );
+  }
+
     return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="#">Social Bug</a>
@@ -8,11 +51,8 @@ const NavBar = () => {
         <span className="navbar-toggler-icon"></span>
         </button>
     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div className="navbar-nav">
-      <a className="nav-link active" href="#">Login <span className="sr-only">(current)</span></a>
-      <a className="nav-link" href="#">Home</a>
-      <a className="nav-link" href="#">Sign Up</a>
-    </div>
+      { !isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar() }
+    
     </div>
     </nav>
     )
