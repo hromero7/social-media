@@ -23,9 +23,9 @@ const Login = () => {
           if (isAuthenticated) {
               authContext.setUser(user);
               authContext.setIsAuthenticated(isAuthenticated);
+              setInvalidCredentials(false);
             //   window.location.replace("/dashboard");
           } else {
-              console.log("hello")
               setInvalidCredentials(true);
           }
         });
