@@ -8,8 +8,8 @@ const Login = () => {
     const [user, setUser] = useState({ username: "", password: "" });
     const authContext = useContext(AuthContext);
     const [invalidCredentials, setInvalidCredentials] = useState(false);
+    
     const handleChange = (e) => {
-        e.preventDefault();
         setUser({...user, [e.target.name] : e.target.value });
 
     }
@@ -33,7 +33,7 @@ const Login = () => {
     
     const renderWarningMsg = () => {
         return (
-            <div class="alert alert-danger" role="alert">
+            <div className="alert alert-danger" role="alert">
                 Please Enter Valid Credentials!
             </div>
         )
@@ -49,17 +49,17 @@ const Login = () => {
             <form className="loginForm" onSubmit={handleSubmit}>
                 {invalidCredentials === true ? renderWarningMsg() : null }
             <div className="form-group">
-            <label for="exampleInputEmail1">Username</label>
+            <label>Username</label>
             <input type="text" className="form-control" name="username" onChange={handleChange}/>
             <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
             <div className="form-group">
-            <label for="exampleInputPassword1">Password</label>
+            <label>Password</label>
             <input type="password" className="form-control" name="password" onChange={handleChange}/>
         </div>
             <div className="form-group form-check">
             <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-            <label className="form-check-label" for="exampleCheck1">Check me out</label>
+            <label className="form-check-label">Check me out</label>
         </div>
   <button type="submit" className="btn btn-primary">Login</button> or 
   <a href="/signup"> Register a new account</a>

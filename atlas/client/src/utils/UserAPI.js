@@ -1,6 +1,6 @@
 export default {
-    login: function(user) {
-        return fetch("http://localhost:3001/user/login", {
+    login: (user) => {
+        return fetch("/user/login", {
             method: "post",
             body: JSON.stringify(user),
             headers: {
@@ -15,8 +15,8 @@ export default {
         });
     },
 
-    register: function(user) {
-        return fetch("http://localhost:3001/user/register", {
+    register: (user) => {
+        return fetch("/user/register", {
             method: "post",
             body: JSON.stringify(user),
             headers: {
@@ -26,20 +26,20 @@ export default {
           .then(data => data);
     },
 
-    logout: function() {
-        return fetch("http://localhost:3001/user/logout")
+    logout: () => {
+        return fetch("/user/logout")
                     .then(res => res.json())
                     .then(data => data)
     },
 
     isAuthenticated: () => {
-        return fetch("http://localhost:3001/user/authenticated")
-                        .then(res => {
-                            if (res.status !== 401) {
-                                return res.json().then(data => data);
-                            } else {
-                                return { isAuthenticated: false, user: { username: "" } }
-                            }
+        return fetch("/user/authenticated")
+                    .then(res => {
+                        if (res.status !== 401) {
+                            return res.json().then(data => data);
+                        } else {
+                            return { isAuthenticated: false, user: { username: "" } }
+                        }
                         });
     }
 }
