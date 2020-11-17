@@ -5,19 +5,42 @@ import "./SignUp.css";
 import Icon from "../assets/bugIcon.png";
 
 const SignUp = () => {
-  const [user, setUser] = useState({firstName: "", lastName: "", email: "", username: "", password: ""})
+  const [user, setUser] = useState({firstName: "", lastName: "", email: "", username: "", password: ""});
+  const [message, setMessage] = useState({});
   const authContext = useContext(AuthContext);
 
   const handleChange = (e) => {
     setUser({...user, [e.target.name]: e.target.value});
   }
 
+  const resetForm = () => {
+    setUser({ firstName: "", lastName: "", email: "", username: "", password: "" })
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     UserAPI.register(user).then(data => {
-      console.log(data);
+      const { message } = data;
+      console.log(message);
+      setMessage(message);
+      resetForm();
+     
     });
   }
+  const renderSuccessMsg = () => {
+    return (
+        <div className="alert alert-primary" role="alert">
+            {message.msgBody}
+        </div>
+    )
+}
+
+const renderWarningMsg = () => {
+  return (
+      <div className="alert alert-danger" role="alert">
+          {message.msgBody}
+      </div>
+  )
+}
 
     return (
 <div className="container">
@@ -28,6 +51,8 @@ const SignUp = () => {
 
 <div className="form">
 <form className="signup-form" onSubmit={handleSubmit}>
+  {message.msgBody && !message.msgError ? renderSuccessMsg() : message.msgBody && message.msgError 
+  ? renderWarningMsg() : null}
 <div className="form-group">
     <label for="firstName">First Name</label>
     <input type="text" className="form-control" name="firstName" onChange={handleChange} />
