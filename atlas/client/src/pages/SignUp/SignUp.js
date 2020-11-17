@@ -55,23 +55,23 @@ const renderWarningMsg = () => {
   ? renderWarningMsg() : null}
 <div className="form-group">
     <label for="firstName">First Name</label>
-    <input type="text" className="form-control" name="firstName" onChange={handleChange} />
+    <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={handleChange} />
   </div>
   <div className="form-group">
     <label for="lastName">Last Name</label>
-    <input type="text" className="form-control" name="lastName" onChange={handleChange}/>
+    <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={handleChange}/>
   </div>
   <div className="form-group">
     <label for="exampleInputEmail1">Email</label>
-    <input type="email" className="form-control" name="email" onChange={handleChange}/>
+    <input type="email" className="form-control" name="email" value={user.email} onChange={handleChange}/>
   </div>
   <div className="form-group">
     <label for="lastName">Username</label>
-    <input type="text" className="form-control" name="username" onChange={handleChange}/>
+    <input type="text" className="form-control" name="username" value={user.username} onChange={handleChange}/>
   </div>
   <div className="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" className="form-control" name="password" onChange={handleChange}/>
+    <input type="password" className="form-control" name="password" value={user.password} onChange={handleChange}/>
   </div>
   <button type="submit" className="btn btn-primary">Sign Up</button>
   <p className="login-link">Already have an account? Login <a href="/">here</a></p>
