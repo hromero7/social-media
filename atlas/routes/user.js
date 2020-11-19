@@ -73,8 +73,8 @@ router.get("/logout", passport.authenticate("jwt", { session: false }), (req, re
 });
 
 router.get("/authenticated", passport.authenticate("jwt", { session: false }), (req, res) => {
-    let { username } = req.user;
-    res.status(200).json({ isAuthenticated: true, user: { username }});
+    let { username,email,posts,firstName,lastName } = req.user;
+    res.status(200).json({ isAuthenticated: true, user: { username,email,posts,firstName,lastName }});
 });
 
 module.exports = router;
