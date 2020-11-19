@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import UserAPI from "../utils/UserAPI";
+
 
 const ProfileCard = () => {
+  const [user,setUser] = useState("");
+
+  useEffect(() => {
+    UserAPI.isAuthenticated().then(data => {
+      console.log(data.user)
+      setUser(data.user);
+    })
+  },[])
 
     return (
         <div className="card profile-card">
@@ -10,9 +20,9 @@ const ProfileCard = () => {
           alt="profile"
         />
         <div className="card-body">
-          <h1 className="card-text username">@username</h1>
+    <h1 className="card-text username">@{user.username}</h1>
           <p className="card-text">
-            <span>Bio:</span> Hello world my name is....
+            <span>Bio:</span> Hello world my name is {user.firstName} {user.lastName}
           </p>
           <p className="card-text">
             <span>Location:</span> London, UK

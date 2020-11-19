@@ -35,12 +35,12 @@ router.post("/post", passport.authenticate("jwt", { session: false }), (req, res
   }
 );
 
-router.post("/posts", passport.authenticate("jwt", { session: false }), (req, res) => {
+router.get("/posts", passport.authenticate("jwt", { session: false }), (req, res) => {
     User.findById({_id : req.user._id}).populate("posts").exec((err,document) => {
         if(err)
             res.status(500).json({message: { msgBody: "Error has occured", msgError: true }});
         else {
-            res.status(200).json({posts: document.posts, authenticated : true});
+            res.status(200).json({posts: document.posts, user: document.username, authenticated : true});
         }
     })
   }

@@ -1,10 +1,24 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import ProfileCard from "../../components/ProfileCard";
 import TweetCard from "../../components/TweetCard";
 import "./Dashboard.css";
+import PostAPI from "../../utils/PostAPI";
+
 
 const Dashboard = () => {
+    const [posts,setPosts] = useState([]);
+    const [user, setUser] = useState("");
+    useEffect(() => {
+        PostAPI.getPosts().then(data => {
+          console.log(data)
+          setPosts(data.posts);
+          setUser(data.user);
+        })
+      },[])
+
+
     return (
+
         <div className="container dashboard">
         
         <div>
@@ -12,11 +26,13 @@ const Dashboard = () => {
         </div>
         
         <div className="feed">
-            <TweetCard/>
-            <TweetCard/>
-            <TweetCard/>
-            <TweetCard/>
-            <TweetCard/>
+            {posts.map((post, i) => {
+               return <TweetCard
+                    key={i} 
+                    body={post.body}
+                    user={user}
+                    />
+            })}
         </div>
 
         </div>
