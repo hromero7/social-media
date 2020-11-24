@@ -55,7 +55,7 @@ router.post("/register", (req, res) => {
                 newUser.email = req.body.email;
                 newUser.username = req.body.username;
                 newUser.password = req.body.password;
-
+                // newUser.avatar = req.body.avatar;
             newUser.save((err, savedUser) => {
                 if (err) {
                     return res.status(500).json({ message: { msgBody: "Error has occured", msgError: true }});
