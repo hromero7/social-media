@@ -26,7 +26,11 @@ password: {
     type: String,
     required: true
 },
-posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}]
+avatar: {
+    type: String,
+    default: "testurl"
+},
+// posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}]
 });
 
 UserSchema.pre("save", function(next) {
