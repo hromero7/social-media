@@ -11,7 +11,7 @@ const Dashboard = () => {
     useEffect(() => {
         PostAPI.getPosts().then(data => {
           console.log(data)
-          setPosts(data.posts);
+          setPosts(data);
           setUser(data.user);
         })
       },[])
@@ -30,7 +30,7 @@ const Dashboard = () => {
                return <TweetCard
                     key={i} 
                     body={post.body}
-                    user={user}
+                    user={post.username}
                     />
             })}
         </div>

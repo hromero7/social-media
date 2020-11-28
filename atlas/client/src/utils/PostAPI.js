@@ -1,6 +1,6 @@
 export default {
     getPosts: () => {
-        return fetch('view/posts', {
+        return fetch('view/allposts', {
             method: "get",
             body: JSON.stringify(),
             headers: {
