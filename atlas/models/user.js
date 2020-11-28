@@ -30,7 +30,10 @@ avatar: {
     type: String,
     default: "testurl"
 },
-// posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}]
+bio: {
+    type: String,
+    default: "Welcome to my profile!"
+}
 });
 
 UserSchema.pre("save", function(next) {

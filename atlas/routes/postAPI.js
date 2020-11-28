@@ -96,6 +96,7 @@ router.put("/likes/:post_id", passport.authenticate("jwt", { session: false }), 
     if (!post) {
       return res.status(404).json({ message: { msgBody: "Post not found", msgError: true }});
     }
+    //users can only like post once
     if (post.likes.find((like) => like.id.toString() === req.user.id)) {
       return res.status(401).json({ message: { msgBody: "You have already liked this post", msgError: true }});
     } else {
@@ -121,10 +122,11 @@ router.put("/likecomment/:post_id/:comment_id", passport.authenticate("jwt", { s
     if (!post) {
       return res.status(404).json({ message: { msgBody: "Post not found", msgError: true }});
     }
+    //function to find comment
     const commentFromPost = post.comments.find(
       (comment) => comment._id.toString() === req.params.comment_id.toString()
     );
-
+    //users can only like a comment once
     if (commentFromPost.likes.find((likes) => likes.id.toString() === req.user.id.toString())) {
       return res.status(401).json({ message: { msgBody: "You have already liked this comment", msgError: true }});
     }
@@ -146,6 +148,108 @@ router.put("/likecomment/:post_id/:comment_id", passport.authenticate("jwt", { s
       });
     };
   });
-})
+});
+
+// delete post route
+router.delete("/deletepost/:post_id", passport.authenticate("jwt", { session: false }), (req, res) => {
+  Post.findById(req.params.post_id, (err, post) => {
+    if (!post) {
+      return res.status(404).json({ message: { msgBody: "Post not found", msgError: true }});
+    }
+    //users can only delete their own posts
+    if (post.userId.toString() !== req.user.id.toString()) {
+      return res.status(401).json({ message: { msgBody: "Not authorized", msgError: true }});
+    }
+    else {
+      post.remove(err => {
+        if (err) {
+          return res.status(500).json({ message: { msgBody: "Error has occured", msgError: true }});
+        } else {
+          return res.status(200).json({message: { msgBody: "Post successfully deleted", msgError: false }});
+        }
+      });
+    }
+
+  });
+});
+
+//delete comment from post route
+router.delete("/deletecomment/:post_id/:comment_id", passport.authenticate("jwt", { session: false}), (req, res) => {
+  Post.findById(req.params.post_id, (err, post) => {
+    if (!post) {
+      return res.status(404).json({ message: { msgBody: "Post not found", msgError: true }});
+    }
+    //function to find comment
+    const commentFromPost = post.comments.find(
+      (comment) => comment._id.toString() === req.params.comment_id.toString()
+    );
+    //users can only delete their own comments
+    if (commentFromPost.username.toString() !== req.user.username.toString()) {
+      return res.status(401).json({ message: { msgBody: "Not authorized", msgError: true }});
+    }
+    //filter out comment that is being deleted
+    const removeComment = post.comments.filter(
+      (comment) => comment._id.toString() !== req.params.comment_id
+      );
+
+      post.comments = removeComment;
+
+      post.save((err, post) => {
+        if (err) {
+          return res.status(500).json({ message: { msgBody: "Error has occured", msgError: true }});
+        } else {
+          return res.status(200).json({post: post, message: { msgBody: "Comment successfully deleted", msgError: false }}); 
+        }
+      });
+  });
+});
+
+//remove like from post 
+router.delete("/deletelike/:post_id/:like_id", passport.authenticate("jwt", { session: false }), (req, res) => {
+  Post.findById(req.params.post_id, (err, post) => {
+    if (!post) {
+      return res.status(404).json({ message: { msgBody: "Post not found", msgError: true }});
+    }
+
+    const removeLike = post.likes.filter(
+      (like) => like._id.toString() !== req.params.like_id.toString()
+    );
+
+    post.likes = removeLike;
+
+    post.save((err, post) => {
+      if (err) {
+        return res.status(500).json({ message: { msgBody: "Error has occured", msgError: true }});
+      } else {
+        return res.status(200).json({post: post, message: { msgBody: "Like successfully deleted", msgError: false }}); 
+      }
+    });
+  });
+});
+
+//remove like from comment
+router.delete("/deletecommentlike/:post_id/:comment_id/:like_id", passport.authenticate("jwt", { session: false }), (req, res) => {
+  Post.findById(req.params.post_id, (err, post) => {
+    if (!post) {
+      return res.status(404).json({ message: { msgBody: "Post not found", msgError: true }});
+    }
+    const comment = post.comments.find(
+      (comment) => comment._id.toString() === req.params.comment_id.toString()
+    );
+    const removeLike = comment.likes.filter(
+      (like) => like._id.toString() !== req.params.like_id.toString()
+    );
+
+    comment.likes = removeLike;
+
+    post.save((err, post) => {
+      if (err) {
+        return res.status(500).json({ message: { msgBody: "Error has occured", msgError: true }});
+      } else {
+        return res.status(200).json({post: post, message: { msgBody: "Like successfully deleted", msgError: false }}); 
+      }
+    });
+  });
+});
 
 module.exports = router;
