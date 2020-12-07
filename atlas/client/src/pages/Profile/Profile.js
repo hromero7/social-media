@@ -1,17 +1,13 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ProfileCard from "../../components/ProfileCard";
 import TweetCard from "../../components/TweetCard";
-import "./Dashboard.css";
 import PostAPI from "../../utils/PostAPI";
 
-
-const Dashboard = () => {
-    
-    const [posts,setPosts] = useState([]);
+const Profile = () => {
+    const [myPosts,setMyPosts] = useState([]);
     useEffect(() => {
-        PostAPI.getPosts().then(data => {
-          console.log(data)
-          setPosts(data);
+        PostAPI.getMyPosts().then(data => {
+          setMyPosts(data.posts);
         })
       },[])
 
@@ -25,22 +21,19 @@ const Dashboard = () => {
         </div>
         
         <div className="feed">
-            {posts.map((post, i) => {
+            {myPosts.map((post, i) => {
                return <TweetCard
                     key={i} 
                     body={post.body}
                     user={post.username}
                     comments={post.comments}
                     likes={post.likes}
-                    postId={post._id}
-                    userId={post.likes.id}
                     />
             })}
         </div>
 
         </div>
     )
-
 }
 
-export default Dashboard;
+export default Profile;

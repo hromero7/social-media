@@ -5,7 +5,9 @@ import './App.css';
 import Login from "./pages/Login/Login"
 import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Profile from "./pages/Profile/Profile";
 import NavBar from "./components/NavBar";
+import Post from "./pages/Post/Post";
 import PrivateRoute from "./utils/PrivateRoute";
 import { AuthContext } from "./context/AuthContext";
 
@@ -19,6 +21,8 @@ function App() {
       <NavBar/>
       <Route exact path= "/" component={Login}/>
       <Route exact path="/signup" component={SignUp}/>
+      <Route exact path="/post/:id" component={Post}/>
+      <PrivateRoute exact path="/profile" component={Profile}/>
       <PrivateRoute path="/dashboard" component={Dashboard}/>
       </div>
     </Router>

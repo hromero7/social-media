@@ -1,20 +1,10 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import PostAPI from "../utils/PostAPI";
-
-
+import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-const TweetCard = (props) => {
-  const { user } = useContext(AuthContext);
-  const [post, setPost] = useState();
 
-  // const postCommentHandler = () => {
-  //   PostAPI.getSinglePost(props.postId).then(data => {
-  //     setPost(data);
-  //   });
-  // }
+const Comment = (props) => {
+    const { user } = useContext(AuthContext);
     return (
-    <div className="card mb-3 tweet-card">
+        <div className="card mb-3 tweet-card">
         <div className="row no-gutters">
     <div className="col-md-4">
       <img src={"https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png"} className="card-img tweet-img" alt="..."/>
@@ -34,11 +24,9 @@ const TweetCard = (props) => {
             }
     
           </button>
-          <Link to={`/post/${props.postId}`}>
-            <button className="engagement-btn">
+            {/* <button className="engagement-btn">
               <i className="far fa-comment" style={{fontSize: "1.2rem"}}> {props.comments.length}</i> 
-            </button>
-          </Link>
+            </button> */}
         </div>
       </div>
     </div>
@@ -47,5 +35,4 @@ const TweetCard = (props) => {
     )
 }
 
-
-export default TweetCard;
+export default Comment;
