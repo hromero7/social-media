@@ -49,3 +49,17 @@
 .card-body {
     text-align: left;
 }
+
+.engagement {
+    font-size: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+    margin-top: 40px;
+}
+
+.engagement-btn {
+    background-color: transparent;
+    border: none;
+    text-align: left;
+}

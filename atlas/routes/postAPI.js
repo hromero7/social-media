@@ -19,6 +19,20 @@ router.get("/allposts", passport.authenticate("jwt", { session: false}), (req, r
   }).sort({ date: -1 });
 });
 
+//get single post
+router.get("/post/:post_id", passport.authenticate("jwt", { session: false }), (req, res) => {
+  Post.findById(req.params.post_id, (err, post) => {
+    if (!post) {
+      return res.status(404).json("Post not found");
+    }
+    if(err) {
+      return res.status(500).json({ message: { msgBody: "Error has occured", msgError: true }});
+    } else {
+      res.status(200).json(post);
+    }
+  });
+});
+
 //create post route
 router.post("/post", passport.authenticate("jwt", { session: false }), (req, res) => {
   let { body } = req.body;

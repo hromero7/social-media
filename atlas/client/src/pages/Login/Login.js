@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import "./Login.css";
 import Icon from "../assets/bugIcon.png";
 
-const Login = () => {
+const Login = (props) => {
     const [user, setUser] = useState({ username: "", password: "" });
     const authContext = useContext(AuthContext);
     const [invalidCredentials, setInvalidCredentials] = useState(false);
@@ -24,7 +24,7 @@ const Login = () => {
               authContext.setUser(user);
               authContext.setIsAuthenticated(isAuthenticated);
               setInvalidCredentials(false);
-            //   window.location.replace("/dashboard");
+              props.history.push("/dashboard");
           } else {
               setInvalidCredentials(true);
           }

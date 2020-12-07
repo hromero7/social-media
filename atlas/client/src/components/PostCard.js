@@ -1,18 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import PostAPI from "../utils/PostAPI";
-
-
 import { AuthContext } from "../context/AuthContext";
-const TweetCard = (props) => {
-  const { user } = useContext(AuthContext);
-  const [post, setPost] = useState();
 
-  // const postCommentHandler = () => {
-  //   PostAPI.getSinglePost(props.postId).then(data => {
-  //     setPost(data);
-  //   });
-  // }
+const PostCard = (props) => {
+  const { user } = useContext(AuthContext);
     return (
     <div className="card mb-3 tweet-card">
         <div className="row no-gutters">
@@ -34,11 +24,9 @@ const TweetCard = (props) => {
             }
     
           </button>
-          <Link to={`/post/${props.postId}`}>
             <button className="engagement-btn">
               <i className="far fa-comment" style={{fontSize: "1.2rem"}}> {props.comments.length}</i> 
             </button>
-          </Link>
         </div>
       </div>
     </div>
@@ -48,4 +36,4 @@ const TweetCard = (props) => {
 }
 
 
-export default TweetCard;
+export default PostCard;
