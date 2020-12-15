@@ -1,13 +1,13 @@
-import React, {useState,useEffect} from "react";
+import React, { useState,useEffect, useContext } from "react";
 import ProfileCard from "../../components/ProfileCard";
 import TweetCard from "../../components/TweetCard";
 import "./Dashboard.css";
 import PostAPI from "../../utils/PostAPI";
-
+import { PostContext } from "../../context/PostContext";
 
 const Dashboard = () => {
-    
-    const [posts,setPosts] = useState([]);
+    const { posts, setPosts } = useContext(PostContext);
+    // const [posts,setPosts] = useState([]);
     useEffect(() => {
         PostAPI.getPosts().then(data => {
           console.log(data)
@@ -30,10 +30,11 @@ const Dashboard = () => {
                     key={i} 
                     body={post.body}
                     user={post.username}
+                    userId={post.userId}
                     comments={post.comments}
                     likes={post.likes}
                     postId={post._id}
-                    userId={post.likes.id}
+                    userLikeId={post.likes.id}
                     />
             })}
         </div>

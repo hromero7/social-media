@@ -1,18 +1,21 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import PostAPI from "../utils/PostAPI";
-
-
+import { PostContext } from "../context/PostContext";
 import { AuthContext } from "../context/AuthContext";
+
 const TweetCard = (props) => {
   const { user } = useContext(AuthContext);
-  const [post, setPost] = useState();
+  const { setPosts } = useContext(PostContext);
 
-  // const postCommentHandler = () => {
-  //   PostAPI.getSinglePost(props.postId).then(data => {
-  //     setPost(data);
-  //   });
-  // }
+  const handleDelete = () => {
+    PostAPI.deletePost(props.postId).then(data => {
+      console.log(data);
+      PostAPI.getPosts().then(data => {
+        setPosts(data);
+      })
+    })
+  }
     return (
     <div className="card mb-3 tweet-card">
         <div className="row no-gutters">
@@ -21,6 +24,9 @@ const TweetCard = (props) => {
     </div>
     <div className="col-md-8">
       <div className="card-body">
+      <div className="delete-btn">
+      { props.userId === user._id ? <button className="engagement-btn" onClick={handleDelete}><i className="fas fa-trash-alt"></i></button> : null}
+      </div>    
         <h5 className="card-title">{props.user}</h5>
         <p className="card-text">{props.body}</p>
         <div className="engagement">

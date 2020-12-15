@@ -28,6 +28,7 @@ const Profile = () => {
                     user={post.username}
                     comments={post.comments}
                     likes={post.likes}
+                    postId={post._id}
                     />
             })}
         </div>

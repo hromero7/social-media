@@ -33,6 +33,16 @@
     font-weight: bolder;
 }
 
+.card-btn {
+    display: grid;
+    justify-content: right;
+    align-items: right;
+}
+
+.fa-edit {
+    font-size: 28px;
+}
+
 /***** Tweet Card CSS *******/
 
 .tweet-card {
@@ -62,4 +72,15 @@
     background-color: transparent;
     border: none;
     text-align: left;
+}
+
+.delete-btn {
+    display: grid;
+    align-items: right;
+    justify-content: right;
+    margin: 0;
+}
+
+.fa-trash-alt {
+    color: red;
 }

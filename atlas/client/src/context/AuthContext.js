@@ -19,7 +19,10 @@ export default ({ children }) => {
 
     return (
         <div>
-            {!isLoaded ? <h1>Loading</h1> : 
+            {!isLoaded ? <div class="d-flex align-items-center">
+                            <strong style={{marginRight: "10px", fontSize: "34px"}}>Loading...</strong>
+                            <div class="spinner-border" role="status" aria-hidden="true"></div>
+                        </div> : 
             <AuthContext.Provider value={{user, setUser, isAuthenticated, setIsAuthenticated}}>
                 { children }
             </AuthContext.Provider>}
