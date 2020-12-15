@@ -11,6 +11,7 @@ const PostCard = (props) => {
     </div>
     <div className="col-md-8">
       <div className="card-body">
+        <button className="engagement-btn delete-btn"><i className="fas fa-trash-alt" style={{color: "red"}}></i></button>
         <h5 className="card-title">{props.user}</h5>
         <p className="card-text">{props.body}</p>
         <div className="engagement">

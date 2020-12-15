@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import AuthProvider from "./context/AuthContext";
+import PostProvider from "./context/PostContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <PostProvider>
+        <App />
+      </PostProvider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')

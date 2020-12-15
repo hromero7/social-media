@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Modal from "./Modal";
 import UserAPI from "../utils/UserAPI";
 
 
@@ -11,6 +12,7 @@ const ProfileCard = () => {
       setUser(data.user);
     })
   },[])
+  
 
     return (
         <div className="card profile-card">
@@ -20,7 +22,7 @@ const ProfileCard = () => {
           alt="profile"
         />
         <div className="card-body">
-    <h1 className="card-text username">@{user.username}</h1>
+          <h1 className="card-text username">@{user.username}</h1>
           <p className="card-text">
             <span>Bio:</span> Hello world my name is {user.firstName} {user.lastName}
           </p>
@@ -30,7 +32,10 @@ const ProfileCard = () => {
           <p className="card-text">
             <span>Age:</span> 21
           </p>
-          <button className="btn btn-primary">Edit Profile</button>
+          <div className="card-btn">
+            {/* <button className="btn btn-primary">Edit Profile</button> */}
+            <Modal/>
+          </div>
         </div>
       </div>
     )
