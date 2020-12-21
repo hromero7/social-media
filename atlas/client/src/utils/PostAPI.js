@@ -51,6 +51,46 @@ export default {
         }).then(res => res.json())
           .then(data => data);
     },
+    likePost: (postId) => {
+        return fetch('/view/likes/' + postId, {
+            method: 'put',
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+          .then(data => data); 
+    },
+    removeLike: (postId, likeId) => {
+        return fetch('/view/deletelike/' + postId + '/' + likeId, {
+            method: 'delete',
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+          .then(data => data)
+    },
+    likeComment: (postId, commentId) => {
+        return fetch('/view/likecomment/' + postId + '/' + commentId, {
+            method: 'put',
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+          .then(data => data)
+    },
+    removeCommentLike: (postId, commentId, likeId) => {
+        return fetch('/view/deletecommentlike/' + postId + '/' + commentId + '/' + likeId, {
+            method: 'delete',
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+          .then(data => data)
+    },
     deletePost: (postId) => {
         return fetch('/view/deletepost/' + postId, {
             method: 'delete',

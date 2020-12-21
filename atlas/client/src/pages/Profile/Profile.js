@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ProfileCard from "../../components/ProfileCard";
 import TweetCard from "../../components/TweetCard";
 import PostAPI from "../../utils/PostAPI";
-
+import { PostContext } from "../../context/PostContext";
 const Profile = () => {
-    const [myPosts,setMyPosts] = useState([]);
+    const { myPosts, setMyPosts } = useContext(PostContext);
     useEffect(() => {
         PostAPI.getMyPosts().then(data => {
           setMyPosts(data.posts);
@@ -26,6 +26,7 @@ const Profile = () => {
                     key={i} 
                     body={post.body}
                     user={post.username}
+                    userId={post.userId}
                     comments={post.comments}
                     likes={post.likes}
                     postId={post._id}
