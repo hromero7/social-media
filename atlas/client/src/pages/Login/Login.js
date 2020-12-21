@@ -24,7 +24,7 @@ const Login = (props) => {
               authContext.setUser(user);
               authContext.setIsAuthenticated(isAuthenticated);
               setInvalidCredentials(false);
-              props.history.push("/dashboard");
+              window.location.replace("/dashboard");
           } else {
               setInvalidCredentials(true);
           }

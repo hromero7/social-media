@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ProfileCard from "../../components/ProfileCard";
 import PostCard from "../../components/PostCard";
 import Comment from "../../components/Comment";
 import PostAPI from "../../utils/PostAPI";
+import { PostContext } from "../../context/PostContext";
 
 const Post = (props) => {
-    // console.log(props.match.params.id)
-    const [post,setPost] = useState({});
-    const [comments, setComments] = useState([]);
-    const [likes, setLikes] = useState([]);
+    const { singlePost, setSinglePost, likes, setLikes, comments, setComments } = useContext(PostContext);
     const [newComment, setNewComment] = useState({ body: "" });
 
     useEffect(() => {
         PostAPI.getSinglePost(props.match.params.id).then(data => {
-          setPost(data);
+          setSinglePost(data);
           setComments(data.comments)
           setLikes(data.likes);
           console.log(data);
@@ -31,7 +29,7 @@ const Post = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        PostAPI.postComment(post._id, newComment).then(res => {
+        PostAPI.postComment(singlePost._id, newComment).then(res => {
             PostAPI.getSinglePost(props.match.params.id).then(data => {
                 setComments(data.comments);
                 resetCommentForm();
@@ -48,12 +46,12 @@ const Post = (props) => {
         
         <div className="feed">
         <PostCard
-                body={post.body}
-                user={post.username}
+                body={singlePost.body}
+                user={singlePost.username}
                 comments={comments}
                 likes={likes}
-                postId={post._id}
-                userId={post.userId}
+                postId={singlePost._id}
+                userId={singlePost.userId}
                 /> 
         <div>
             <form className="form-group" onSubmit={handleSubmit}>

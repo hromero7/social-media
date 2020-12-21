@@ -6,7 +6,31 @@ import { AuthContext } from "../context/AuthContext";
 
 const TweetCard = (props) => {
   const { user } = useContext(AuthContext);
-  const { setPosts } = useContext(PostContext);
+  const { setPosts, setMyPosts } = useContext(PostContext);
+
+  const handleLikeBtn = () => {
+    if (props.likes.find((like) => like.id === user._id)) {
+      props.likes.find((like) => PostAPI.removeLike(props.postId, like._id).then(data => {
+        console.log(data)
+        PostAPI.getPosts().then(data => {
+          setPosts(data);
+          PostAPI.getMyPosts().then(data => {
+            setMyPosts(data.posts);
+          })
+        })
+      }))
+    } else {
+      PostAPI.likePost(props.postId).then(data => {
+        console.log(data)
+        PostAPI.getPosts().then(data => {
+          setPosts(data);
+          PostAPI.getMyPosts().then(data => {
+            setMyPosts(data.posts);
+          })
+        })
+      });
+    }
+  }
 
   const handleDelete = () => {
     PostAPI.deletePost(props.postId).then(data => {
@@ -30,8 +54,8 @@ const TweetCard = (props) => {
         <h5 className="card-title">{props.user}</h5>
         <p className="card-text">{props.body}</p>
         <div className="engagement">
-          <button className="engagement-btn">
-            
+          <button className="engagement-btn" onClick={handleLikeBtn}>
+
             {
               props.likes.find((like) => like.id === user._id)
               ? <i className="fas fa-heart" style={{color: "red", fontSize: "1.2rem"}}> {props.likes.length} </i>
