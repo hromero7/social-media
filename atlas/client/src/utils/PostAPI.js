@@ -100,5 +100,15 @@ export default {
             }
         }).then(res => res.json())
           .then(data => data);
+    },
+    deleteComment: (postId, commentId) => {
+        return fetch('/view/deletecomment/' + postId + '/' + commentId, {
+            method: 'delete',
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+          .then(data => data);
     }
 }
