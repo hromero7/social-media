@@ -36,6 +36,7 @@ const PostCard = (props) => {
   const handleDelete = () => {
     PostAPI.deletePost(props.postId).then(data => {
       console.log(data);
+      props.history.push("/dashboard");
       PostAPI.getPosts().then(data => {
         setPosts(data);
       })

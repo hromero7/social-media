@@ -52,6 +52,7 @@ const Post = (props) => {
                 likes={likes}
                 postId={singlePost._id}
                 userId={singlePost.userId}
+                history={props.history}
                 /> 
         <div>
             <form className="form-group" onSubmit={handleSubmit}>

@@ -29,6 +29,17 @@ const Comment = (props) => {
         }
         
     }
+
+    const handleDelete = () => {
+        PostAPI.deleteComment(singlePost._id, props.commentId).then(data => {
+            console.log(data);
+            PostAPI.getSinglePost(singlePost._id).then(data => {
+                setSinglePost(data);
+                setComments(data.comments);
+                setLikes(data.likes);
+            })
+        })
+    }
     return (
         <div className="card mb-3 tweet-card">
         <div className="row no-gutters">
@@ -37,6 +48,9 @@ const Comment = (props) => {
     </div>
     <div className="col-md-8">
       <div className="card-body">
+      <div className="delete-btn">
+      { props.user === user.username ? <button className="engagement-btn" onClick={handleDelete}><i className="fas fa-trash-alt"></i></button> : null}
+      </div>   
         <h5 className="card-title">{props.user}</h5>
         <p className="card-text">{props.body}</p>
         <div className="engagement">
