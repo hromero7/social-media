@@ -1,12 +1,15 @@
-import React, { useState,useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ProfileCard from "../../components/ProfileCard";
 import TweetCard from "../../components/TweetCard";
 import "./Dashboard.css";
 import PostAPI from "../../utils/PostAPI";
 import { PostContext } from "../../context/PostContext";
+import { MessageContext } from "../../context/MessageContext";
+import Message from "../../components/Message";
 
 const Dashboard = () => {
     const { posts, setPosts } = useContext(PostContext);
+    const { message, setMessage } = useContext(MessageContext);
     // const [posts,setPosts] = useState([]);
     useEffect(() => {
         PostAPI.getPosts().then(data => {
@@ -25,6 +28,7 @@ const Dashboard = () => {
         </div>
         
         <div className="feed">
+           { message ? <Message/> : null }
             {posts.map((post, i) => {
                return <TweetCard
                     key={i} 
