@@ -5,12 +5,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import AuthProvider from "./context/AuthContext";
 import PostProvider from "./context/PostContext";
+import MessageProvider from "./context/MessageContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
       <PostProvider>
-        <App />
+        <MessageProvider>
+          <App />
+        </MessageProvider>
       </PostProvider>
     </AuthProvider>
   </React.StrictMode>,

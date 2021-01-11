@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import PostAPI from "../utils/PostAPI";
 import { PostContext } from "../context/PostContext";
+import { MessageContext } from "../context/MessageContext";
 
 const Modal = () => {
     const { posts, setPosts } = useContext(PostContext)
+    const { message, setMessage } = useContext(MessageContext);
     const [newPost, setNewPost] = useState({ body: "" });
 
     const handleChange = (e) => {
@@ -17,7 +19,8 @@ const Modal = () => {
     const handleClick = (e) => {
         e.preventDefault();
         PostAPI.createPost(newPost).then(res => {
-            console.log(res);
+            // console.log(res);
+            setMessage(res);
             resetPostForm();
             PostAPI.getPosts().then(data => {
                 setPosts(data);
@@ -27,7 +30,6 @@ const Modal = () => {
     return (
 <div>
 <button type="button" className="btn" data-toggle="modal" data-target="#exampleModal"><i className="far fa-edit"></i></button>
-
 <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
