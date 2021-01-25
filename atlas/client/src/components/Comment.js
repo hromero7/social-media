@@ -11,13 +11,14 @@ const Comment = (props) => {
         console.log(props.commentId);
         console.log(singlePost._id)
         if (props.likes.find((like) => like.id === user._id)) {
-            props.likes.find((like) => PostAPI.removeCommentLike(singlePost._id, props.commentId, like._id).then(data => {
+            const like = props.likes.find((like) => like.id === user._id)
+            PostAPI.removeCommentLike(singlePost._id, props.commentId, like._id).then(data => {
                 PostAPI.getSinglePost(singlePost._id).then(data => {
                     setSinglePost(data);
                     setComments(data.comments);
                     setLikes(data.likes);
                 })
-            }))
+            })
         } else {
             PostAPI.likeComment(singlePost._id, props.commentId).then(data => {
                 PostAPI.getSinglePost(singlePost._id).then(data => {

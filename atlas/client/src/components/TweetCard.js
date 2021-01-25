@@ -10,7 +10,8 @@ const TweetCard = (props) => {
 
   const handleLikeBtn = () => {
     if (props.likes.find((like) => like.id === user._id)) {
-      props.likes.find((like) => PostAPI.removeLike(props.postId, like._id).then(data => {
+      const like = props.likes.find((like) => like.id === user._id)
+      PostAPI.removeLike(props.postId, like._id).then(data => {
         console.log(data)
         PostAPI.getPosts().then(data => {
           setPosts(data);
@@ -18,7 +19,7 @@ const TweetCard = (props) => {
             setMyPosts(data.posts);
           })
         })
-      }))
+      })
     } else {
       PostAPI.likePost(props.postId).then(data => {
         console.log(data)
