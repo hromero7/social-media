@@ -2,6 +2,8 @@ const router = require("express").Router();
 const passport = require("passport");
 const passportConfig = require("../middleware/passport");
 const JWT = require("jsonwebtoken");
+const multer = require("multer");
+const fs = require("fs");
 const User = require("../models/user");
 
 const signToken = userID => {
@@ -11,15 +13,26 @@ const signToken = userID => {
     }, "socialbug", { expiresIn: "2h"});
 }
 
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "./uploads")
+    },
+    filename: (req, file, cb) => {
+        cb(null, req.user._id + '.jpg')
+    }
+});
+
+let upload = multer({ storage: storage });
+
 router.get("/", (req, res) => {
    res.json({works: "good"})
 });
 
-//get user route
-router.get("/:user_id", passport.authenticate("jwt", { session: false}), (req, res) => {
+// get user route
+router.get("/profile/:user_id", passport.authenticate("jwt", { session: false}), (req, res) => {
     User.findById(req.params.user_id, (err, user) => {
         if (!user) {
-            return res.status(404).json("Post not found"); 
+            return res.status(404).json("User not found"); 
         }
         if (err) {
             return res.status(500).json({ message: { msgBody: "Error has occured", msgError: true }});
@@ -42,7 +55,6 @@ router.post("/login", passport.authenticate("local", { session: false }), (req, 
 //register new user route
 router.post("/register", (req, res) => {
     let username = req.body.username;
-    let email = req.body.email;
     
     User.findOne({ username }, (err, user) => {
         if (err) {
@@ -80,6 +92,24 @@ router.get("/authenticated", passport.authenticate("jwt", { session: false }), (
     res.status(200).json({ isAuthenticated: true, user: { username,email,_id,firstName,lastName }});
 });
 
+//update bio 
+router.put("/bio/:user_id", passport.authenticate("jwt", { session: false }), (req, res) => {
+    User.findById(req.params.user_id, (err, user) => {
+        if (!user) {
+            return res.status(404).json({ message: { msgBody: "User not found", msgError: true }});
+        } else {
+            let newBio = req.body.bio;
+            user.bio = newBio;
+            user.save((err, user) => {
+                if (err) {
+                    return res.status(500).json({ message: { msgBody: "Error has occured", msgError: true }});
+                  } else {
+                    return res.status(200).json({ message: { msgBody: "Bio updated successfully", msgError: false }}); 
+                  }
+            });
+        }
+    });
+});
 //following route 
 router.put("/follow", passport.authenticate("jwt", { session: false }), (req, res) => {
     User.findById(req.body.followId, (err, user) => {
@@ -149,6 +179,45 @@ router.put("/unfollow", passport.authenticate("jwt", { session: false }), (req, 
         })
     });
     });
+});
+
+//get user image route
+router.get("/image/:user_id", passport.authenticate("jwt", { session: false }), (req, res) => {
+    fs.readFile(`../atlas/uploads/${req.params.user_id}.jpg`, (err, data) => {
+        if (err) {
+            fs.readFile("../atlas/uploads/default-pic.jpg", (err, defaultData) => {
+                if (err) {
+                    return res.status(500).json({ message: { msgBody: err, msgError: true }});
+                } else {
+                    res.writeHead(200, { "Content-Type": "text/html" });
+                    res.write('"data:image/jpeg;base64,');
+                    res.write(Buffer.from(defaultData).toString("base64"));
+                    res.end('"');
+                }
+            })
+        } else {
+            res.writeHead(200, { "Content-Type": "text/html" });
+            res.write('"data:image/jpeg;base64,');
+            res.write(Buffer.from(data).toString("base64"));
+            res.end('"');
+        }
+    });
+});
+
+//upload image route
+router.post("/upload", passport.authenticate("jwt", { session: false }), upload.single("file"), (req, res) => {
+    // console.log(req.user);
+    console.log(req.user)
+    if (req.user._id) {
+        const file = req.file;
+        if (!file) {
+            return res.status(400).json({ message: { msgBody: "Please upload a file", msgError: true }});
+        } else {
+            return res.send("file uploaded");
+        }
+    } else {
+        return res.status(500).json({ message: { msgBody: "Error has occured", msgError: true }});
+    }
 });
 
 module.exports = router;
