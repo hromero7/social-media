@@ -74,6 +74,10 @@
     text-align: left;
 }
 
+.engagement-btn:focus {
+    outline: none;
+}
+
 .delete-btn {
     display: grid;
     align-items: right;

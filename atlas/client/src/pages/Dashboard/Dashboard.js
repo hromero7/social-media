@@ -21,7 +21,7 @@ const Dashboard = () => {
 
     return (
 
-        <div className="container dashboard">
+        <div className="container dashboard animate__animated animate__fadeIn">
         
         <div>
             <ProfileCard/>
