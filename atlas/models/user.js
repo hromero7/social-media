@@ -33,7 +33,23 @@ avatar: {
 bio: {
     type: String,
     default: "Welcome to my profile!"
-}
+},
+followers: [
+    {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
+    }
+],
+following: [
+    {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
+    }
+]
 });
 
 UserSchema.pre("save", function(next) {
