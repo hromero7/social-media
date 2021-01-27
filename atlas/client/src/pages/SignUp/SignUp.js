@@ -3,6 +3,8 @@ import UserAPI from "../../utils/UserAPI";
 import { AuthContext } from "../../context/AuthContext";
 import "./SignUp.css";
 import Icon from "../assets/bugIcon.png";
+import { Link } from "react-router-dom";
+
 
 const SignUp = () => {
   const [user, setUser] = useState({firstName: "", lastName: "", email: "", username: "", password: ""});
@@ -43,11 +45,10 @@ const renderWarningMsg = () => {
 }
 
     return (
-<div className="container">
-<h1 className="socialTitle">Social<span className="subtitle">Bug</span>
-            {/* <i className="fas fa-bug"></i> */}
-    <img className="bugIcon" src={Icon} alt=""/>
-</h1>
+<div>
+            <div className="circle2 animate__animated animate__rotateOutDownRight animate__delay-1s">
+            <img className="bugIcon2" src={Icon} alt=""/>       
+            </div>
 
 <div className="form">
 <form className="signup-form" onSubmit={handleSubmit}>
@@ -74,9 +75,18 @@ const renderWarningMsg = () => {
     <input type="password" className="form-control" name="password" value={user.password} onChange={handleChange}/>
   </div>
   <button type="submit" className="btn btn-primary">Sign Up</button>
-  <p className="login-link">Already have an account? Login <a href="/">here</a></p>
 </form>
 </div>
+<div style={{textAlign: "center"}}>
+        <h1 className="socialTitle">social<span className="subtitle">bug</span>
+        {/* <i className="fas fa-bug"></i> */}
+        <img className="bugIcon" src={Icon} alt=""/>       
+        </h1>
+        <p style={{textAlign: "center", fontWeight: "bold"}}>Already have an account? Click here to Login!</p>
+        <Link to="/">
+        <a href="#"><button className="btn btn-primary">Login</button></a>
+        </Link>
+        </div>
 </div>
     )
 }

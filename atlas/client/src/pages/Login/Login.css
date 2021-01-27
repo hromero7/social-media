@@ -1,5 +1,5 @@
 html, body {
-    background-color: #fafaf6;
+    background-color: white;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -12,6 +12,9 @@ html, body {
     font-family: 'Montserrat', sans-serif;
     text-align: center;
     color: #3d6cb9;
+    float: left;
+    margin-top: 30px;
+    width: 50%;
 }
 .subtitle {
     color: #61dafb;
@@ -20,17 +23,42 @@ html, body {
     width:57px;
 }
 
+.bugIcon2 {
+    width: 500px;
+    margin: 118px 0;
+}
+
+.circle {
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+    background-color: #61dafb;
+    left: -246px;
+    top: 54px;
+    text-align: center;
+    overflow: hidden;
+
+}
+
 /*form*/
+
+.form-control {
+    width: 70%;
+}
 
 .loginForm {
     width: 50%;
-    margin: auto;
+    float: right;
+    /* margin: auto; */
     margin-top: 30px;
-    border: #61dafb solid 3px;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* border: #61dafb solid 3px; */
+    /* border-radius: 10px; */
+    padding: 0 90px;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
+
 
 @media screen and (max-width:768px) {
     .loginForm {

@@ -3,6 +3,8 @@ import UserAPI from "../../utils/UserAPI";
 import { AuthContext } from "../../context/AuthContext";
 import "./Login.css";
 import Icon from "../assets/bugIcon.png";
+import { Link } from "react-router-dom";
+
 
 const Login = (props) => {
     const [user, setUser] = useState({ username: "", password: "" });
@@ -40,11 +42,12 @@ const Login = (props) => {
     }
 
     return(
-        <div className="container loginPage">
-            <h1 className="socialTitle">Social<span className="subtitle">Bug</span>
-            {/* <i className="fas fa-bug"></i> */}
-            <img className="bugIcon" src={Icon} alt=""/>
-            </h1>
+        <div>
+            <div className="circle animate__animated animate__rotateOutDownLeft animate__delay-1s">
+            <img className="bugIcon2" src={Icon} alt=""/>       
+            </div>
+        <div className=" loginPage">
+            
             
             <form className="loginForm" onSubmit={handleSubmit}>
                 {invalidCredentials === true ? renderWarningMsg() : null }
@@ -61,9 +64,20 @@ const Login = (props) => {
             <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
             <label className="form-check-label">Check me out</label>
         </div>
-  <button type="submit" className="btn btn-primary">Login</button> or 
-  <a href="/signup"> Register a new account</a>
+  <button type="submit" className="btn btn-primary">Login</button>
 </form>
+
+        </div>
+        <div style={{textAlign: "center"}}>
+        <h1 className="socialTitle">social<span className="subtitle">bug</span>
+        {/* <i className="fas fa-bug"></i> */}
+        <img className="bugIcon" src={Icon} alt=""/>       
+        </h1>
+        <p style={{textAlign: "center", fontWeight: "bold"}}>New here? Click here to sign up!</p>
+        <Link to="/signup">
+        <a href="#"><button className="btn btn-primary">Get Started</button></a>
+        </Link>
+        </div>
         </div>
     )
 }
