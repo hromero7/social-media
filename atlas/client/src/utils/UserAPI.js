@@ -1,3 +1,5 @@
+import { useImperativeHandle } from "react";
+
 export default {
     login: (user) => {
         return fetch("/user/login", {
@@ -41,5 +43,21 @@ export default {
                             return { isAuthenticated: false, user: { username: "" } }
                         }
                         });
-    }
+    },
+    
+    // getUser: (userId) => {
+    //     return fetch("/user/profile/" + userId)
+    // }
+    getImage: (userId) => {
+        return fetch("/user/image/" + userId, {
+            method: "get",
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(data => data)
+}
+
 }

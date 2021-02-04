@@ -1,11 +1,19 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import PostAPI from "../utils/PostAPI";
+import UserAPI from "../utils/UserAPI";
 import { PostContext } from "../context/PostContext";
 import { AuthContext } from "../context/AuthContext";
 
+
 const PostCard = (props) => {
   const { user } = useContext(AuthContext);
-  const { setPosts, setSinglePost, setLikes, setComments } = useContext(PostContext);
+  const { setPosts, setSinglePost, setLikes, setComments, postImage, setPostImage } = useContext(PostContext);
+
+  useEffect(() => {
+    UserAPI.getImage(props.userId).then(data => {
+      setPostImage(data);
+    })
+  },[props.userId])
 
   const handleLikeBtn = () => {
     if (props.likes.find((like) => like.id === user._id)) {
@@ -48,7 +56,7 @@ const PostCard = (props) => {
     <div className="card mb-3 tweet-card">
         <div className="row no-gutters">
     <div className="col-md-4">
-      <img src={"https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png"} className="card-img tweet-img" alt="..."/>
+      <img src={postImage} className="card-img tweet-img" alt="..."/>
     </div>
     <div className="col-md-8">
       <div className="card-body">

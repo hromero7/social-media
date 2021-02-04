@@ -68,6 +68,7 @@ const Post = (props) => {
                     user={comment.username}
                     likes={comment.likes}
                     commentId={comment._id}
+                    avatar={comment.avatar}
                     />
             })
         }

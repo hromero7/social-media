@@ -1,33 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Modal from "./Modal";
 import UserAPI from "../utils/UserAPI";
-
+import { AuthContext } from "../context/AuthContext";
 
 const ProfileCard = () => {
-  const [user,setUser] = useState("");
-
-  useEffect(() => {
-    UserAPI.isAuthenticated().then(data => {
-      console.log(data.user)
-      setUser(data.user);
-    })
-  },[])
+  const { user, followers, following } = useContext(AuthContext);
+  // const [user,setUser] = useState("");
+  // useEffect(() => {
+  //   UserAPI.getImage(user._id).then(data => {
+  //     setUserImage(data);
+  // })
+  // },[])
   
 
     return (
         <div className="card profile-card">
         <img
-          src={"https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png"}
+          src={`data:image/jpeg;base64,${user.avatar}`}
           className="card-img-top profile-card-top"
           alt="profile"
         />
         <div className="card-body">
           <h1 className="card-text username">@{user.username}</h1>
           <p className="card-text">
-            <span>Bio:</span> Hello world my name is {user.firstName} {user.lastName}
+            <span>Bio:</span> {user.bio}
           </p>
           <p className="card-text">
-            <span>Location:</span> London, UK
+            <span>Following:</span> {user? following.length : 0}
+          </p>
+          <p className="card-text">
+            <span>Followers:</span> {user? followers.length : 0}
           </p>
           <p className="card-text">
             <span>Age:</span> 21

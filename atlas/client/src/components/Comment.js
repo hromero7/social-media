@@ -45,7 +45,7 @@ const Comment = (props) => {
         <div className="card mb-3 tweet-card">
         <div className="row no-gutters">
     <div className="col-md-4">
-      <img src={"https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png"} className="card-img tweet-img" alt="..."/>
+      <img src={`data:image/jpeg;base64,${props.avatar}`} className="card-img tweet-img" alt="..."/>
     </div>
     <div className="col-md-8">
       <div className="card-body">

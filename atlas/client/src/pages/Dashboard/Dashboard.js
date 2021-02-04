@@ -3,12 +3,14 @@ import ProfileCard from "../../components/ProfileCard";
 import TweetCard from "../../components/TweetCard";
 import "./Dashboard.css";
 import PostAPI from "../../utils/PostAPI";
+import UserAPI from "../../utils/UserAPI";
 import { PostContext } from "../../context/PostContext";
 import { MessageContext } from "../../context/MessageContext";
 import Message from "../../components/Message";
 
+
 const Dashboard = () => {
-    const { posts, setPosts } = useContext(PostContext);
+    const { posts, setPosts, setTweetImage, tweetImage } = useContext(PostContext);
     const { message, setMessage } = useContext(MessageContext);
     // const [posts,setPosts] = useState([]);
     useEffect(() => {
@@ -18,6 +20,12 @@ const Dashboard = () => {
         })
       },[])
 
+// const getImage = (id) => {
+//   UserAPI.getImage(id).then(data => {
+//     setTweetImage(data);
+//   })
+//   return tweetImage;
+// }
 
     return (
 
@@ -39,6 +47,7 @@ const Dashboard = () => {
                     likes={post.likes}
                     postId={post._id}
                     userLikeId={post.likes.id}
+                    avatar={post.avatar}
                     />
             })}
         </div>
