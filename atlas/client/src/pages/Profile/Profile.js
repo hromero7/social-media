@@ -21,7 +21,7 @@ const Profile = () => {
         </div>
         
         <div className="feed">
-            {myPosts.map((post, i) => {
+            {myPosts.length > 0 ? myPosts.map((post, i) => {
                return <TweetCard
                     key={i} 
                     body={post.body}
@@ -30,8 +30,9 @@ const Profile = () => {
                     comments={post.comments}
                     likes={post.likes}
                     postId={post._id}
+                    avatar={post.avatar}
                     />
-            })}
+            }) : <div>No Posts</div>    }
         </div>
 
         </div>

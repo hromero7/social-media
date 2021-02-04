@@ -8,7 +8,9 @@ export default ({ children }) => {
     const [singlePost, setSinglePost] = useState([]);
     const [likes, setLikes] = useState([]);
     const [comments, setComments] = useState([]);
-
+    const [tweetImage, setTweetImage] = useState([]);
+    const [postImage, setPostImage] = useState([]);
+    const [commentImage, setCommentImage] = useState([]);
     return (
         <div>
             <PostContext.Provider value={{ 
@@ -21,7 +23,13 @@ export default ({ children }) => {
                 likes,
                 setLikes,
                 comments,
-                setComments
+                setComments,
+                tweetImage,
+                setTweetImage,
+                postImage,
+                setPostImage,
+                commentImage,
+                setCommentImage
                         }}>
                 { children }
             </PostContext.Provider>

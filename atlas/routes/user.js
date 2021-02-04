@@ -88,8 +88,8 @@ router.get("/logout", passport.authenticate("jwt", { session: false }), (req, re
 });
 //authenicate user route
 router.get("/authenticated", passport.authenticate("jwt", { session: false }), (req, res) => {
-    let { username,email,_id,firstName,lastName } = req.user;
-    res.status(200).json({ isAuthenticated: true, user: { username,email,_id,firstName,lastName }});
+    let { username,email,_id,firstName,lastName, bio, followers, following, avatar } = req.user;
+    res.status(200).json({ isAuthenticated: true, user: { username,email,_id,firstName,lastName,bio,followers,following,avatar }});
 });
 
 //update bio 
@@ -193,6 +193,7 @@ router.get("/image/:user_id", passport.authenticate("jwt", { session: false }), 
                     res.write('"data:image/jpeg;base64,');
                     res.write(Buffer.from(defaultData).toString("base64"));
                     res.end('"');
+                    
                 }
             })
         } else {
@@ -206,19 +207,24 @@ router.get("/image/:user_id", passport.authenticate("jwt", { session: false }), 
 
 //upload image route
 router.post("/upload", passport.authenticate("jwt", { session: false }), upload.single("file"), (req, res) => {
-    // console.log(req.user);
-    console.log(req.user)
+    console.log(req.file);
     if (req.user._id) {
         const file = req.file;
         if (!file) {
             return res.status(400).json({ message: { msgBody: "Please upload a file", msgError: true }});
         } else {
-            return res.send("file uploaded");
-        }
+            fs.readFile(req.file.path, (err, data) => {
+                // console.log(data.toString("base64"));
+                req.user.avatar = data.toString("base64");
+                req.user.save();
+            })
+            res.send("file uploaded");
+        } 
     } else {
         return res.status(500).json({ message: { msgBody: "Error has occured", msgError: true }});
     }
 });
+
 
 module.exports = router;
 

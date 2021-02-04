@@ -9,6 +9,7 @@ import Profile from "./pages/Profile/Profile";
 import NavBar from "./components/NavBar";
 import Post from "./pages/Post/Post";
 import PrivateRoute from "./utils/PrivateRoute";
+import PublicRoute from "./utils/PublicRoute";
 import { AuthContext } from "./context/AuthContext";
 
 function App() {
@@ -19,9 +20,9 @@ function App() {
     <Router>
       <div>
       <NavBar/>
-      <Route exact path= "/" component={Login}/>
-      <Route exact path="/signup" component={SignUp}/>
-      <Route exact path="/post/:id" component={Post}/>
+      <PublicRoute exact path= "/" component={Login}/>
+      <PublicRoute exact path="/signup" component={SignUp}/>
+      <PrivateRoute exact path="/post/:id" component={Post}/>
       <PrivateRoute exact path="/profile" component={Profile}/>
       <PrivateRoute path="/dashboard" component={Dashboard}/>
       </div>
