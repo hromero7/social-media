@@ -211,14 +211,14 @@ router.post("/upload", passport.authenticate("jwt", { session: false }), upload.
     if (req.user._id) {
         const file = req.file;
         if (!file) {
-            return res.status(400).json({ message: { msgBody: "Please upload a file", msgError: true }});
+            return res.status(400).json({ message: { msgBody: "Please select an image", msgError: true }});
         } else {
             fs.readFile(req.file.path, (err, data) => {
                 // console.log(data.toString("base64"));
                 req.user.avatar = data.toString("base64");
                 req.user.save();
             })
-            res.send("file uploaded");
+            res.status(200).json({ message: { msgBody: "Image successfully uploaded", msgError: false }});
         } 
     } else {
         return res.status(500).json({ message: { msgBody: "Error has occured", msgError: true }});

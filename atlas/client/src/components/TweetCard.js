@@ -64,7 +64,11 @@ const TweetCard = (props) => {
       <div className="card-body">
       <div className="delete-btn">
       { props.userId === user._id ? <button className="engagement-btn" onClick={handleDelete}><i className="fas fa-trash-alt"></i></button> : null}
-      </div>    
+      {props.userId !== user._id ? <button className="engagement-btn"><i class="fas fa-user-plus"></i></button> : null}
+      </div>
+      {/* <div className="follow-btn">
+        {props.userId !== user._id ? <button className="btn btn-primary">Follow</button> : null}
+      </div>       */}
         <h5 className="card-title">{props.user}</h5>
         <p className="card-text">{props.body}</p>
         <div className="engagement">

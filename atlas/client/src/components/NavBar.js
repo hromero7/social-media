@@ -21,11 +21,16 @@ const NavBar = (props) => {
   }
   const profileStyle = {
     position : "absolute",
-    right: "8%"
+    right: "15.5%"
   }
   const dashStyle = {
     position : "absolute",
-    right: "15%"
+    right: "22%"
+  }
+
+  const settingStyle = {
+    position: "absolute",
+    right: "8%"
   }
 
   //Nav items that will populate when user is not logged in
@@ -47,10 +52,13 @@ const NavBar = (props) => {
     return (
     <div className="navbar-nav">
           <Link to="/dashboard">
-            <a className="nav-link" style={dashStyle} href="#">Dashboard <i class="fas fa-list"></i></a>
+            <a className="nav-link" style={dashStyle} href="#">Dashboard <i className="fas fa-list"></i></a>
           </Link>
           <Link to="/profile">
-            <a className="nav-link" style={profileStyle} href="#">Profile <i class="far fa-user"></i></a>
+            <a className="nav-link" style={profileStyle} href="#">Profile <i className="far fa-user"></i></a>
+          </Link>
+          <Link to="/settings">
+            <a className="nav-link" style={settingStyle} href="#">Settings <i className="fas fa-cog"></i></a>
           </Link>
           <button className="btn btn-primary" style={logoutStyle} onClick={logoutHandler}>Logout</button>
         </div>
