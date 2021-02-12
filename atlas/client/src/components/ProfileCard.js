@@ -26,10 +26,10 @@ const ProfileCard = () => {
             <span>Bio:</span> {user.bio}
           </p>
           <p className="card-text">
-            <span>Following:</span> {user? following.length : 0}
+            <span>Following:</span> {following === undefined? 0 : following.length}
           </p>
           <p className="card-text">
-            <span>Followers:</span> {user? followers.length : 0}
+            <span>Followers:</span> {followers === undefined? 0 : followers.length }
           </p>
           <p className="card-text">
             <span>Age:</span> 21

@@ -29,7 +29,7 @@ const Dashboard = () => {
 
     return (
 
-        <div className="container dashboard animate__animated animate__fadeIn">
+        <div className="container dashboard animate__animated">
         
         <div>
             <ProfileCard/>

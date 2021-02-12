@@ -58,6 +58,43 @@ export default {
         })
         .then(res => res.json())
         .then(data => data)
-}
+},
+    uploadImage: (file) => {
+        return fetch("/user/upload", {
+            method: "post",
+            body: file,
+        }).then(res => res.json())
+          .then(data => data); 
+    },
+    updateBio: (userId, bio) => {
+        return fetch("/user/bio/" + userId, {
+            method: "put",
+            body: JSON.stringify(bio),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+          .then(data => data);
+    },
+    followUser: (followId) => {
+        return fetch("/user/follow", {
+            method: "put",
+            body: JSON.stringify(followId),
+            headers: {
+                "Content-Type": "application/json"
+            } 
+        }).then(res => res.json())
+          .then(data => data);
+    },
+    unfollowUser: (unfollowId) => {
+        return fetch("/user/unfollow", {
+            method: "put",
+            body: JSON.stringify(unfollowId),
+            headers: {
+                "Content-Type": "application/json"
+            } 
+        }).then(res => res.json())
+          .then(data => data);
+    } 
 
 }

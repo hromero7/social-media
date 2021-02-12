@@ -5,6 +5,7 @@ import './App.css';
 import Login from "./pages/Login/Login"
 import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Settings from "./pages/Settings/Settings";
 import Profile from "./pages/Profile/Profile";
 import NavBar from "./components/NavBar";
 import Post from "./pages/Post/Post";
@@ -25,6 +26,7 @@ function App() {
       <PrivateRoute exact path="/post/:id" component={Post}/>
       <PrivateRoute exact path="/profile" component={Profile}/>
       <PrivateRoute path="/dashboard" component={Dashboard}/>
+      <PrivateRoute path="/settings" component={Settings}/>
       </div>
     </Router>
     
