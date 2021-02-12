@@ -102,6 +102,7 @@ router.get("/myposts", passport.authenticate("jwt", { session: false }), (req, r
             lastName: req.user.lastName,
             username: req.user.username,
             avatar: req.user.avatar,
+            userId: req.user.id
           }
       
           post.comments.unshift(newComment);
