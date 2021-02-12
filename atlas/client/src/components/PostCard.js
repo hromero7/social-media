@@ -6,8 +6,9 @@ import { AuthContext } from "../context/AuthContext";
 
 
 const PostCard = (props) => {
-  const { user } = useContext(AuthContext);
+  const { user, setUser, setFollowing } = useContext(AuthContext);
   const { setPosts, setSinglePost, setLikes, setComments, postImage, setPostImage } = useContext(PostContext);
+  const [iconClass, setIconClass] = useState({ isHovered: false });
 
   useEffect(() => {
     UserAPI.getImage(props.userId).then(data => {
@@ -15,6 +16,12 @@ const PostCard = (props) => {
     })
   },[props.userId])
 
+  const toggleIconClass = () => {
+    setIconClass({ isHovered: true });
+  }
+  const toggleIconFalse = () => {
+    setIconClass({ isHovered: false });
+  }
   const handleLikeBtn = () => {
     if (props.likes.find((like) => like.id === user._id)) {
       const like = props.likes.find((like) => like.id === user._id);
@@ -52,6 +59,29 @@ const PostCard = (props) => {
       })
     })
   }
+  //follow user logic
+  const handleFollowUser = () => {
+    let followId = { followId: props.userId }
+    UserAPI.followUser(followId).then(data => {
+      console.log(data);
+      UserAPI.isAuthenticated().then(data => {
+            setUser(data.user)
+            setFollowing(data.user.following);
+          });
+    })
+  }
+
+  //unfollow user logic
+  const handleUnfollowUser = () => {
+    let unfollowId = { unfollowId: props.userId }
+    UserAPI.unfollowUser(unfollowId).then(data => {
+      console.log(data)
+      UserAPI.isAuthenticated().then(data => {
+        setUser(data.user)
+        setFollowing(data.user.following)
+      });
+    })
+  }
     return (
     <div className="card mb-3 tweet-card">
         <div className="row no-gutters">
@@ -62,7 +92,16 @@ const PostCard = (props) => {
       <div className="card-body">
       <div className="delete-btn">
       { props.userId === user._id ? <button className="engagement-btn" onClick={handleDelete}><i className="fas fa-trash-alt"></i></button> : null}
-      {props.userId !== user._id ? <button className="engagement-btn"><i class="fas fa-user-plus"></i></button> : null}
+      {
+        user.following === undefined ? null 
+        : user.following.find((follow) => follow.id === props.userId) ?
+        <button className="engagement-btn" onClick={handleUnfollowUser} onMouseEnter={toggleIconClass} onMouseLeave={toggleIconFalse}>
+          <i class={iconClass.isHovered? "fas fa-user-times" : "fas fa-user-check"} style={iconClass.isHovered? {color: "red"} : {color: "blue"}}></i>
+        </button> 
+        : props.userId !== user._id ?  
+        <button className="engagement-btn" onClick={handleFollowUser}><i class="fas fa-user-plus" style={{color: "green"}}></i></button> 
+        : null
+      }
       </div>
         {/* <button className="engagement-btn delete-btn"><i className="fas fa-trash-alt" style={{color: "red"}}></i></button> */}
         <h5 className="card-title">{props.user}</h5>
