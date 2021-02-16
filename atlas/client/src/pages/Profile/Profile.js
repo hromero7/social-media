@@ -4,17 +4,17 @@ import TweetCard from "../../components/TweetCard";
 import PostAPI from "../../utils/PostAPI";
 import { PostContext } from "../../context/PostContext";
 const Profile = () => {
-    const { myPosts, setMyPosts } = useContext(PostContext);
+    const { myPosts, setMyPosts, posts } = useContext(PostContext);
     useEffect(() => {
         PostAPI.getMyPosts().then(data => {
           setMyPosts(data.posts);
         })
-      },[])
+      },[posts])
 
 
     return (
 
-        <div className="container dashboard animate__animated animate__fadeIn">
+        <div className="container dashboard">
         
         <div>
             <ProfileCard/>

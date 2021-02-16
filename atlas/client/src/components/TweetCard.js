@@ -81,7 +81,9 @@ const TweetCard = (props) => {
     <div className="card mb-3 tweet-card">
         <div className="row no-gutters">
     <div className="col-md-4">
+    <Link to={`/user/profile/${props.userId}`}>
       <img src={`data:image/jpeg;base64,${props.avatar}`} className="card-img tweet-img" alt="..."/>
+    </Link>
     </div>
     <div className="col-md-8">
       <div className="card-body">

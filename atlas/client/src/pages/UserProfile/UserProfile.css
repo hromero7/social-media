@@ -1,0 +1,22 @@
+.name {
+    font-size: 1.5rem;
+}
+
+.username {
+    font-size: 1.2rem;
+}
+
+.user-profile {
+    margin-right: 20px; 
+    height: auto;
+    width: auto; 
+}
+
+.profile-card-body {
+    text-align: center;
+}
+
+.user-followers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
