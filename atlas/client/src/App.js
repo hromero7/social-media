@@ -12,6 +12,7 @@ import Post from "./pages/Post/Post";
 import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoute from "./utils/PublicRoute";
 import { AuthContext } from "./context/AuthContext";
+import UserProfile from "./pages/UserProfile/UserProfile";
 
 function App() {
   const { user, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
@@ -27,6 +28,7 @@ function App() {
       <PrivateRoute exact path="/profile" component={Profile}/>
       <PrivateRoute path="/dashboard" component={Dashboard}/>
       <PrivateRoute path="/settings" component={Settings}/>
+      <PrivateRoute exact path="/user/profile/:userId" component={UserProfile}/>
       </div>
     </Router>
     

@@ -44,9 +44,18 @@ export default {
                         });
     },
     
-    // getUser: (userId) => {
-    //     return fetch("/user/profile/" + userId)
-    // }
+    getUser: (userId) => {
+        return fetch("/user/profile/" + userId, {
+            method: "get",
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(data => data); 
+    },
+    
     getImage: (userId) => {
         return fetch("/user/image/" + userId, {
             method: "get",
