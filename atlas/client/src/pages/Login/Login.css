@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Damion&display=swap');
+
 html, body {
     background-color: white;
     font-family: 'Montserrat', sans-serif;
@@ -9,16 +11,22 @@ html, body {
 
 /*Heading*/
 .socialTitle {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Damion', cursive, sans-serif;
     text-align: center;
-    color: #3d6cb9;
+    font-size: 6rem;
+    background: linear-gradient(to left, rgb(0, 242, 96), rgb(5, 117, 230));
     float: left;
     margin-top: 30px;
     width: 50%;
+    -webkit-background-clip: text;
+    background-clip: none;
+    -webkit-text-fill-color: transparent;
+    user-select: none;
+    padding: 5px;
 }
-.subtitle {
+/* .subtitle {
     color: #61dafb;
-}
+} */
 .bugIcon {
     width:57px;
 }

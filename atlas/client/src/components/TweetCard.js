@@ -1,13 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PostAPI from "../utils/PostAPI";
+import UserAPI from "../utils/UserAPI";
 import { PostContext } from "../context/PostContext";
 import { AuthContext } from "../context/AuthContext";
+import { MessageContext } from "../context/MessageContext";
+import Moment from "react-moment";
 
 const TweetCard = (props) => {
-  const { user } = useContext(AuthContext);
-  const { setPosts, setMyPosts } = useContext(PostContext);
-
+  const { user, setUser, setFollowing } = useContext(AuthContext);
+  const { posts, setPosts, setMyPosts, setFollowingPosts } = useContext(PostContext);
+  const { setMessage } = useContext(MessageContext);
+  const [iconClass, setIconClass] = useState({ isHovered: false });
+  // useEffect(() => {
+  //   UserAPI.isAuthenticated().then(data => {
+  //     setUser(data.user)
+  //   })
+  // },[])
+  const toggleIconClass = () => {
+    setIconClass({ isHovered: true });
+  }
+  const toggleIconFalse = () => {
+    setIconClass({ isHovered: false });
+  }
   const handleLikeBtn = () => {
     if (props.likes.find((like) => like.id === user._id)) {
       const like = props.likes.find((like) => like.id === user._id)
@@ -17,6 +32,9 @@ const TweetCard = (props) => {
           setPosts(data);
           PostAPI.getMyPosts().then(data => {
             setMyPosts(data.posts);
+            PostAPI.getFollowingPosts().then(data => {
+              setFollowingPosts(data);
+            })
           })
         })
       })
@@ -27,6 +45,9 @@ const TweetCard = (props) => {
           setPosts(data);
           PostAPI.getMyPosts().then(data => {
             setMyPosts(data.posts);
+            PostAPI.getFollowingPosts().then(data => {
+              setFollowingPosts(data);
+            })
           })
         })
       });
@@ -36,22 +57,65 @@ const TweetCard = (props) => {
   const handleDelete = () => {
     PostAPI.deletePost(props.postId).then(data => {
       console.log(data);
+      setMessage(data);
+      setTimeout(() => setMessage(null), 4000);
       PostAPI.getPosts().then(data => {
         setPosts(data);
       })
+    })
+  }
+
+  //follow user logic
+  const handleFollowUser = () => {
+    let followId = { followId: props.userId }
+    UserAPI.followUser(followId).then(data => {
+      console.log(data);
+      UserAPI.isAuthenticated().then(data => {
+            setUser(data.user)
+            setFollowing(data.user.following);
+          });
+    })
+  }
+
+  //unfollow user logic
+  const handleUnfollowUser = () => {
+    let unfollowId = { unfollowId: props.userId }
+    UserAPI.unfollowUser(unfollowId).then(data => {
+      console.log(data)
+      UserAPI.isAuthenticated().then(data => {
+        setUser(data.user)
+        setFollowing(data.user.following)
+      });
     })
   }
     return (
     <div className="card mb-3 tweet-card">
         <div className="row no-gutters">
     <div className="col-md-4">
-      <img src={"https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png"} className="card-img tweet-img" alt="..."/>
+    <Link to={`/user/profile/${props.userId}`}>
+      <img src={`data:image/jpeg;base64,${props.avatar}`} className="card-img tweet-img" alt="..."/>
+    </Link>
     </div>
     <div className="col-md-8">
-      <div className="card-body">
+      <div className="card-body tweet-card-body">
       <div className="delete-btn">
+      <Moment fromNow local style={{fontSize:"10px"}}>{props.date}</Moment>
       { props.userId === user._id ? <button className="engagement-btn" onClick={handleDelete}><i className="fas fa-trash-alt"></i></button> : null}
-      </div>    
+      {/* {props.userId !== user._id ? <button className="engagement-btn" onClick={handleFollowUser}><i class="fas fa-user-plus"></i></button> : null} */}
+      {
+       user.following === undefined? null :
+        user.following.find((follow) => follow.id === props.userId) ?
+        <button className="engagement-btn" onClick={handleUnfollowUser} onMouseEnter={toggleIconClass} onMouseLeave={toggleIconFalse}>
+          <i class={iconClass.isHovered? "fas fa-user-times" : "fas fa-user-check"} style={iconClass.isHovered? {color: "red"} : {color: "blue"}}></i>
+        </button> 
+        : props.userId !== user._id ?  
+        <button className="engagement-btn" onClick={handleFollowUser}><i class="fas fa-user-plus" style={{color: "green"}}></i></button> 
+        : null
+      }
+      </div>
+      {/* <div className="follow-btn">
+        {props.userId !== user._id ? <button className="btn btn-primary">Follow</button> : null}
+      </div>       */}
         <h5 className="card-title">{props.user}</h5>
         <p className="card-text">{props.body}</p>
         <div className="engagement">
@@ -70,6 +134,7 @@ const TweetCard = (props) => {
               <i className="far fa-comment" style={{fontSize: "1.2rem"}}> {props.comments.length}</i> 
             </button>
           </Link>
+          
         </div>
       </div>
     </div>

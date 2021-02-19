@@ -78,7 +78,7 @@ const renderWarningMsg = () => {
 </form>
 </div>
 <div style={{textAlign: "center"}}>
-        <h1 className="socialTitle">social<span className="subtitle">bug</span>
+        <h1 className="socialTitle">Social Bug
         {/* <i className="fas fa-bug"></i> */}
         <img className="bugIcon" src={Icon} alt=""/>       
         </h1>

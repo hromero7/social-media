@@ -4,24 +4,24 @@ import TweetCard from "../../components/TweetCard";
 import PostAPI from "../../utils/PostAPI";
 import { PostContext } from "../../context/PostContext";
 const Profile = () => {
-    const { myPosts, setMyPosts } = useContext(PostContext);
+    const { myPosts, setMyPosts, posts } = useContext(PostContext);
     useEffect(() => {
         PostAPI.getMyPosts().then(data => {
           setMyPosts(data.posts);
         })
-      },[])
+      },[posts])
 
 
     return (
 
-        <div className="container dashboard animate__animated animate__fadeIn">
+        <div className="container dashboard">
         
         <div>
             <ProfileCard/>
         </div>
         
         <div className="feed">
-            {myPosts.map((post, i) => {
+            {myPosts.length > 0 ? myPosts.map((post, i) => {
                return <TweetCard
                     key={i} 
                     body={post.body}
@@ -30,8 +30,9 @@ const Profile = () => {
                     comments={post.comments}
                     likes={post.likes}
                     postId={post._id}
+                    avatar={post.avatar}
                     />
-            })}
+            }) : <div>No Posts</div>    }
         </div>
 
         </div>

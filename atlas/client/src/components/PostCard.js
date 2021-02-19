@@ -1,12 +1,29 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import PostAPI from "../utils/PostAPI";
+import UserAPI from "../utils/UserAPI";
 import { PostContext } from "../context/PostContext";
 import { AuthContext } from "../context/AuthContext";
+import { MessageContext} from "../context/MessageContext";
 
 const PostCard = (props) => {
-  const { user } = useContext(AuthContext);
-  const { setPosts, setSinglePost, setLikes, setComments } = useContext(PostContext);
+  const { user, setUser, setFollowing } = useContext(AuthContext);
+  const { setPosts, setSinglePost, setLikes, setComments, postImage, setPostImage } = useContext(PostContext);
+  const { setMessage } = useContext(MessageContext);
+  const [iconClass, setIconClass] = useState({ isHovered: false });
 
+  useEffect(() => {
+    UserAPI.getImage(props.userId).then(data => {
+      setPostImage(data);
+    })
+  },[props.userId])
+
+  const toggleIconClass = () => {
+    setIconClass({ isHovered: true });
+  }
+  const toggleIconFalse = () => {
+    setIconClass({ isHovered: false });
+  }
   const handleLikeBtn = () => {
     if (props.likes.find((like) => like.id === user._id)) {
       const like = props.likes.find((like) => like.id === user._id);
@@ -39,22 +56,59 @@ const PostCard = (props) => {
     PostAPI.deletePost(props.postId).then(data => {
       console.log(data);
       props.history.push("/dashboard");
+      setMessage(data);
+      setTimeout(() => setMessage(null), 4000);
       PostAPI.getPosts().then(data => {
         setPosts(data);
       })
+    })
+  }
+  //follow user logic
+  const handleFollowUser = () => {
+    let followId = { followId: props.userId }
+    UserAPI.followUser(followId).then(data => {
+      console.log(data);
+      UserAPI.isAuthenticated().then(data => {
+            setUser(data.user)
+            setFollowing(data.user.following);
+          });
+    })
+  }
+
+  //unfollow user logic
+  const handleUnfollowUser = () => {
+    let unfollowId = { unfollowId: props.userId }
+    UserAPI.unfollowUser(unfollowId).then(data => {
+      console.log(data)
+      UserAPI.isAuthenticated().then(data => {
+        setUser(data.user)
+        setFollowing(data.user.following)
+      });
     })
   }
     return (
     <div className="card mb-3 tweet-card">
         <div className="row no-gutters">
     <div className="col-md-4">
-      <img src={"https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png"} className="card-img tweet-img" alt="..."/>
+      <Link to={`/user/profile/${props.userId}`}>
+      <img src={postImage} className="card-img tweet-img" alt="..."/>
+      </Link>
     </div>
     <div className="col-md-8">
       <div className="card-body">
       <div className="delete-btn">
       { props.userId === user._id ? <button className="engagement-btn" onClick={handleDelete}><i className="fas fa-trash-alt"></i></button> : null}
-      </div>    
+      {
+        user.following === undefined ? null 
+        : user.following.find((follow) => follow.id === props.userId) ?
+        <button className="engagement-btn" onClick={handleUnfollowUser} onMouseEnter={toggleIconClass} onMouseLeave={toggleIconFalse}>
+          <i class={iconClass.isHovered? "fas fa-user-times" : "fas fa-user-check"} style={iconClass.isHovered? {color: "red"} : {color: "blue"}}></i>
+        </button> 
+        : props.userId !== user._id ?  
+        <button className="engagement-btn" onClick={handleFollowUser}><i class="fas fa-user-plus" style={{color: "green"}}></i></button> 
+        : null
+      }
+      </div>
         {/* <button className="engagement-btn delete-btn"><i className="fas fa-trash-alt" style={{color: "red"}}></i></button> */}
         <h5 className="card-title">{props.user}</h5>
         <p className="card-text">{props.body}</p>

@@ -85,6 +85,19 @@ router.get("/myposts", passport.authenticate("jwt", { session: false }), (req, r
     }).sort({ date: -1 });
   });
 
+//get user's following posts 
+router.get("/posts/following", passport.authenticate("jwt", { session: false }), (req, res) => {
+  let id = req.user.following.map(following => {
+    return following.id
+  })
+  Post.find({userId: id}, (err, posts) => {
+    if(err)
+      res.status(500).json({message: { msgBody: "Error has occured", msgError: true }});
+      else {
+      res.status(200).json(posts);
+      }
+}).sort({ date: -1 });
+});
   //add comment 
   router.put("/addcomment/:post_id", passport.authenticate("jwt", { session: false }), (req, res) => {
     let { body } = req.body;
@@ -102,6 +115,7 @@ router.get("/myposts", passport.authenticate("jwt", { session: false }), (req, r
             lastName: req.user.lastName,
             username: req.user.username,
             avatar: req.user.avatar,
+            userId: req.user.id
           }
       
           post.comments.unshift(newComment);

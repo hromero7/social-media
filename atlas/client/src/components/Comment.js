@@ -1,12 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import PostAPI from "../utils/PostAPI";
+import UserAPI from "../utils/UserAPI";
 import { PostContext } from "../context/PostContext";
 import { AuthContext } from "../context/AuthContext";
 
 const Comment = (props) => {
-    const { user } = useContext(AuthContext);
+    const { user, setUser, setFollowing } = useContext(AuthContext);
     const { singlePost, setSinglePost, setLikes, setComments } = useContext(PostContext);
-
+    const [iconClass, setIconClass] = useState({ isHovered: false });
+    const toggleIconClass = () => {
+      setIconClass({ isHovered: true });
+    }
+    const toggleIconFalse = () => {
+      setIconClass({ isHovered: false });
+    }
     const handleLikeBtn = () => {
         console.log(props.commentId);
         console.log(singlePost._id)
@@ -41,16 +49,51 @@ const Comment = (props) => {
             })
         })
     }
+      //follow user logic
+  const handleFollowUser = () => {
+    let followId = { followId: props.userId }
+    UserAPI.followUser(followId).then(data => {
+      console.log(data);
+      UserAPI.isAuthenticated().then(data => {
+            setUser(data.user)
+            setFollowing(data.user.following);
+          });
+    })
+  }
+
+  //unfollow user logic
+  const handleUnfollowUser = () => {
+    let unfollowId = { unfollowId: props.userId }
+    UserAPI.unfollowUser(unfollowId).then(data => {
+      console.log(data)
+      UserAPI.isAuthenticated().then(data => {
+        setUser(data.user)
+        setFollowing(data.user.following)
+      });
+    })
+  }
     return (
         <div className="card mb-3 tweet-card">
         <div className="row no-gutters">
     <div className="col-md-4">
-      <img src={"https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png"} className="card-img tweet-img" alt="..."/>
+      <Link to={`/user/profile/${props.userId}`}>
+      <img src={`data:image/jpeg;base64,${props.avatar}`} className="card-img tweet-img" alt="..."/>
+      </Link>
     </div>
     <div className="col-md-8">
       <div className="card-body">
       <div className="delete-btn">
       { props.user === user.username ? <button className="engagement-btn" onClick={handleDelete}><i className="fas fa-trash-alt"></i></button> : null}
+      {
+        user.following === undefined? null 
+        : user.following.find((follow) => follow.id === props.userId) ?
+        <button className="engagement-btn" onClick={handleUnfollowUser} onMouseEnter={toggleIconClass} onMouseLeave={toggleIconFalse}>
+          <i class={iconClass.isHovered? "fas fa-user-times" : "fas fa-user-check"} style={iconClass.isHovered? {color: "red"} : {color: "blue"}}></i>
+        </button> 
+        : props.userId !== user._id ?  
+        <button className="engagement-btn" onClick={handleFollowUser}><i class="fas fa-user-plus" style={{color: "green"}}></i></button> 
+        : null
+      }
       </div>   
         <h5 className="card-title">{props.user}</h5>
         <p className="card-text">{props.body}</p>

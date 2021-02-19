@@ -88,8 +88,8 @@ router.get("/logout", passport.authenticate("jwt", { session: false }), (req, re
 });
 //authenicate user route
 router.get("/authenticated", passport.authenticate("jwt", { session: false }), (req, res) => {
-    let { username,email,_id,firstName,lastName } = req.user;
-    res.status(200).json({ isAuthenticated: true, user: { username,email,_id,firstName,lastName }});
+    let { username,email,_id,firstName,lastName, bio, followers, following, avatar } = req.user;
+    res.status(200).json({ isAuthenticated: true, user: { username,email,_id,firstName,lastName,bio,followers,following,avatar }});
 });
 
 //update bio 
@@ -181,6 +181,74 @@ router.put("/unfollow", passport.authenticate("jwt", { session: false }), (req, 
     });
 });
 
+//get logged in user follower info
+router.get("/followers/info", passport.authenticate("jwt", { session: false }), (req, res) => {
+    let id = req.user.followers.map(follower => {
+        return follower.id
+    })
+    User.find({ _id: id }, (err, users) => {
+    if(err)
+      res.status(500).json({message: { msgBody: "Error has occured", msgError: true }});
+    else {
+      res.status(200).json(users);
+      }
+    }).select("-password")
+});
+
+//get logged in user following info 
+router.get("/following/info", passport.authenticate("jwt", { session: false }), (req, res) => {
+    let id = req.user.following.map(following => {
+        return following.id
+    })
+    User.find({ _id: id }, (err, users) => {
+    if(err)
+      res.status(500).json({message: { msgBody: "Error has occured", msgError: true }});
+    else {
+      res.status(200).json(users);
+      }
+    }).select("-password")
+});
+
+//get other users follower info
+router.get("/user_followers/info/:user_id", passport.authenticate("jwt", { session: false }), (req, res) => {
+    User.findById(req.params.user_id, (err, user) => {
+        if (!user) {
+            return res.status(404).json({ message: { msgBody: "User not found", msgError: true }});
+        } else {
+            let id = user.followers.map(follower => {
+                return follower.id
+            })
+            User.find({ _id: id }, (err, users) => {
+                if(err)
+                  res.status(500).json({message: { msgBody: "Error has occured", msgError: true }});
+                else {
+                  res.status(200).json(users);
+                  }
+                }).select("-password")
+        }
+    })
+});
+
+//get other users following info 
+router.get("/user_following/info/:user_id", passport.authenticate("jwt", { session: false }), (req, res) => {
+    User.findById(req.params.user_id, (err, user) => {
+        if (!user) {
+            return res.status(404).json({ message: { msgBody: "User not found", msgError: true }});
+        } else {
+            let id = user.following.map(following => {
+                return following.id
+            })
+            User.find({ _id: id }, (err, users) => {
+                if(err)
+                  res.status(500).json({message: { msgBody: "Error has occured", msgError: true }});
+                else {
+                  res.status(200).json(users);
+                  }
+                }).select("-password")
+        }
+    })
+});
+
 //get user image route
 router.get("/image/:user_id", passport.authenticate("jwt", { session: false }), (req, res) => {
     fs.readFile(`../atlas/uploads/${req.params.user_id}.jpg`, (err, data) => {
@@ -193,6 +261,7 @@ router.get("/image/:user_id", passport.authenticate("jwt", { session: false }), 
                     res.write('"data:image/jpeg;base64,');
                     res.write(Buffer.from(defaultData).toString("base64"));
                     res.end('"');
+                    
                 }
             })
         } else {
@@ -206,19 +275,24 @@ router.get("/image/:user_id", passport.authenticate("jwt", { session: false }), 
 
 //upload image route
 router.post("/upload", passport.authenticate("jwt", { session: false }), upload.single("file"), (req, res) => {
-    // console.log(req.user);
-    console.log(req.user)
+    console.log(req.file);
     if (req.user._id) {
         const file = req.file;
         if (!file) {
-            return res.status(400).json({ message: { msgBody: "Please upload a file", msgError: true }});
+            return res.status(400).json({ message: { msgBody: "Please select an image", msgError: true }});
         } else {
-            return res.send("file uploaded");
-        }
+            fs.readFile(req.file.path, (err, data) => {
+                // console.log(data.toString("base64"));
+                req.user.avatar = data.toString("base64");
+                req.user.save();
+            })
+            res.status(200).json({ message: { msgBody: "Image successfully uploaded", msgError: false }});
+        } 
     } else {
         return res.status(500).json({ message: { msgBody: "Error has occured", msgError: true }});
     }
 });
+
 
 module.exports = router;
 

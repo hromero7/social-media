@@ -14,6 +14,7 @@ const Modal = () => {
     
     const resetPostForm = () => {
         setNewPost({ body: "" });
+        setTimeout(() => setMessage(null), 4000);
     }
 
     const handleClick = (e) => {

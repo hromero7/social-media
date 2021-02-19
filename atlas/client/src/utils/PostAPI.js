@@ -31,6 +31,26 @@ export default {
         }).then(res => res.json())
           .then(data => data); 
     },
+    getUserPosts: (userId) => {
+        return fetch('/view/userpost/' + userId, {
+            method: 'get',
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+          .then(data => data); 
+    },
+    getFollowingPosts: () => {
+        return fetch('/view/posts/following', {
+            method: 'get',
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+          .then(data => data); 
+    },
     createPost: (post) => {
         return fetch('/view/post', {
             method: 'post',
