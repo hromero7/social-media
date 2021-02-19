@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import Modal from "./Modal";
 import UserAPI from "../utils/UserAPI";
 import { AuthContext } from "../context/AuthContext";
+import FollowerModal from "./FollowerModal";
+import FollowingModal from "./FollowingModal";
 
 const ProfileCard = () => {
   const { user, followers, following } = useContext(AuthContext);
@@ -21,19 +23,21 @@ const ProfileCard = () => {
           alt="profile"
         />
         <div className="card-body">
+          <h1 className="card-text name">{user.firstName} {user.lastName}</h1>
           <h1 className="card-text username">@{user.username}</h1>
           <p className="card-text">
             <span>Bio:</span> {user.bio}
           </p>
-          <p className="card-text">
-            <span>Following:</span> {following === undefined? 0 : following.length}
-          </p>
-          <p className="card-text">
-            <span>Followers:</span> {followers === undefined? 0 : followers.length }
-          </p>
-          <p className="card-text">
-            <span>Age:</span> 21
-          </p>
+        <div className="user-followers">
+          <a className="card-text">
+            <FollowingModal following={following}/>
+            {/* <span>Following:</span> {following === undefined? 0 : following.length} */}
+          </a>
+          <a className="card-text">
+          <FollowerModal followers={followers}/>
+            {/* <span>Followers:</span> {followers === undefined? 0 : followers.length } */}
+          </a>
+        </div>
           <div className="card-btn">
             {/* <button className="btn btn-primary">Edit Profile</button> */}
             <Modal/>

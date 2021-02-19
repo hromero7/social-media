@@ -55,7 +55,7 @@ export default {
         .then(res => res.json())
         .then(data => data); 
     },
-    
+
     getImage: (userId) => {
         return fetch("/user/image/" + userId, {
             method: "get",
@@ -103,6 +103,46 @@ export default {
             } 
         }).then(res => res.json())
           .then(data => data);
-    } 
+    },
+    getFollowersList: () => {
+        return fetch("/user/followers/info", {
+            method: "get",
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            } 
+        }).then(res => res.json())
+          .then(data => data);
+    },
+    getFollowingList: () => {
+        return fetch("/user/following/info", {
+            method: "get",
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            } 
+        }).then(res => res.json())
+          .then(data => data);
+    },
+    getUserFollowers: (userId) => {
+        return fetch("/user/user_followers/info/" + userId, {
+            method: "get",
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            } 
+        }).then(res => res.json())
+          .then(data => data);
+    },
+    getUserFollowing: (userId) => {
+        return fetch("/user/user_following/info/" + userId, {
+            method: "get",
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            } 
+        }).then(res => res.json())
+          .then(data => data);
+    }
 
 }

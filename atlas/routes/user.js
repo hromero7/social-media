@@ -181,6 +181,74 @@ router.put("/unfollow", passport.authenticate("jwt", { session: false }), (req, 
     });
 });
 
+//get logged in user follower info
+router.get("/followers/info", passport.authenticate("jwt", { session: false }), (req, res) => {
+    let id = req.user.followers.map(follower => {
+        return follower.id
+    })
+    User.find({ _id: id }, (err, users) => {
+    if(err)
+      res.status(500).json({message: { msgBody: "Error has occured", msgError: true }});
+    else {
+      res.status(200).json(users);
+      }
+    }).select("-password")
+});
+
+//get logged in user following info 
+router.get("/following/info", passport.authenticate("jwt", { session: false }), (req, res) => {
+    let id = req.user.following.map(following => {
+        return following.id
+    })
+    User.find({ _id: id }, (err, users) => {
+    if(err)
+      res.status(500).json({message: { msgBody: "Error has occured", msgError: true }});
+    else {
+      res.status(200).json(users);
+      }
+    }).select("-password")
+});
+
+//get other users follower info
+router.get("/user_followers/info/:user_id", passport.authenticate("jwt", { session: false }), (req, res) => {
+    User.findById(req.params.user_id, (err, user) => {
+        if (!user) {
+            return res.status(404).json({ message: { msgBody: "User not found", msgError: true }});
+        } else {
+            let id = user.followers.map(follower => {
+                return follower.id
+            })
+            User.find({ _id: id }, (err, users) => {
+                if(err)
+                  res.status(500).json({message: { msgBody: "Error has occured", msgError: true }});
+                else {
+                  res.status(200).json(users);
+                  }
+                }).select("-password")
+        }
+    })
+});
+
+//get other users following info 
+router.get("/user_following/info/:user_id", passport.authenticate("jwt", { session: false }), (req, res) => {
+    User.findById(req.params.user_id, (err, user) => {
+        if (!user) {
+            return res.status(404).json({ message: { msgBody: "User not found", msgError: true }});
+        } else {
+            let id = user.following.map(following => {
+                return following.id
+            })
+            User.find({ _id: id }, (err, users) => {
+                if(err)
+                  res.status(500).json({message: { msgBody: "Error has occured", msgError: true }});
+                else {
+                  res.status(200).json(users);
+                  }
+                }).select("-password")
+        }
+    })
+});
+
 //get user image route
 router.get("/image/:user_id", passport.authenticate("jwt", { session: false }), (req, res) => {
     fs.readFile(`../atlas/uploads/${req.params.user_id}.jpg`, (err, data) => {

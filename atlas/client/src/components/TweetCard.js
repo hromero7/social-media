@@ -4,10 +4,13 @@ import PostAPI from "../utils/PostAPI";
 import UserAPI from "../utils/UserAPI";
 import { PostContext } from "../context/PostContext";
 import { AuthContext } from "../context/AuthContext";
+import { MessageContext } from "../context/MessageContext";
+import Moment from "react-moment";
 
 const TweetCard = (props) => {
   const { user, setUser, setFollowing } = useContext(AuthContext);
-  const { posts, setPosts, setMyPosts } = useContext(PostContext);
+  const { posts, setPosts, setMyPosts, setFollowingPosts } = useContext(PostContext);
+  const { setMessage } = useContext(MessageContext);
   const [iconClass, setIconClass] = useState({ isHovered: false });
   // useEffect(() => {
   //   UserAPI.isAuthenticated().then(data => {
@@ -29,6 +32,9 @@ const TweetCard = (props) => {
           setPosts(data);
           PostAPI.getMyPosts().then(data => {
             setMyPosts(data.posts);
+            PostAPI.getFollowingPosts().then(data => {
+              setFollowingPosts(data);
+            })
           })
         })
       })
@@ -39,6 +45,9 @@ const TweetCard = (props) => {
           setPosts(data);
           PostAPI.getMyPosts().then(data => {
             setMyPosts(data.posts);
+            PostAPI.getFollowingPosts().then(data => {
+              setFollowingPosts(data);
+            })
           })
         })
       });
@@ -48,6 +57,8 @@ const TweetCard = (props) => {
   const handleDelete = () => {
     PostAPI.deletePost(props.postId).then(data => {
       console.log(data);
+      setMessage(data);
+      setTimeout(() => setMessage(null), 4000);
       PostAPI.getPosts().then(data => {
         setPosts(data);
       })
@@ -86,8 +97,9 @@ const TweetCard = (props) => {
     </Link>
     </div>
     <div className="col-md-8">
-      <div className="card-body">
+      <div className="card-body tweet-card-body">
       <div className="delete-btn">
+      <Moment fromNow local style={{fontSize:"10px"}}>{props.date}</Moment>
       { props.userId === user._id ? <button className="engagement-btn" onClick={handleDelete}><i className="fas fa-trash-alt"></i></button> : null}
       {/* {props.userId !== user._id ? <button className="engagement-btn" onClick={handleFollowUser}><i class="fas fa-user-plus"></i></button> : null} */}
       {
@@ -122,6 +134,7 @@ const TweetCard = (props) => {
               <i className="far fa-comment" style={{fontSize: "1.2rem"}}> {props.comments.length}</i> 
             </button>
           </Link>
+          
         </div>
       </div>
     </div>
