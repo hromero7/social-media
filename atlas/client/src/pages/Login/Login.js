@@ -3,6 +3,8 @@ import UserAPI from "../../utils/UserAPI";
 import { AuthContext } from "../../context/AuthContext";
 import "./Login.css";
 import Icon from "../assets/bugIcon.png";
+import Icon2 from "../assets/bugIconWhite.png";
+
 import { Link } from "react-router-dom";
 
 
@@ -42,10 +44,23 @@ const Login = (props) => {
     }
 
     return(
-        <div>
-            <div className="circle animate__animated animate__rotateOutDownLeft animate__delay-1s">
-            <img className="bugIcon2" src={Icon} alt=""/>       
+        <div className="loginContainer">
+
+            <div className="titleContainer" style={{textAlign: "center"}}>
+                <h1 className="socialTitle">Social Bug
+                    {/* <i className="fas fa-bug"></i> */}
+                    <img className="bugIcon" src={Icon} alt=""/>       
+                </h1>
+                <p style={{textAlign: "center", fontWeight: "bold"}}>New here? Click here to sign up!</p>
+                <Link to="/signup">
+                    <a href="#"><button className="btn btn-primary">Get Started</button></a>
+                </Link>
             </div>
+
+            <div className="circle animate__animated animate__rotateOutDownLeft animate__delay-1s">
+            <img className="bugIcon2" src={Icon2} alt=""/>       
+            </div>
+            
         <div className=" loginPage">
             
             
@@ -68,16 +83,7 @@ const Login = (props) => {
 </form>
 
         </div>
-        <div style={{textAlign: "center"}}>
-        <h1 className="socialTitle">Social Bug
-        {/* <i className="fas fa-bug"></i> */}
-        <img className="bugIcon" src={Icon} alt=""/>       
-        </h1>
-        <p style={{textAlign: "center", fontWeight: "bold"}}>New here? Click here to sign up!</p>
-        <Link to="/signup">
-        <a href="#"><button className="btn btn-primary">Get Started</button></a>
-        </Link>
-        </div>
+        
         </div>
     )
 }

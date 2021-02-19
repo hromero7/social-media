@@ -3,6 +3,7 @@ import UserAPI from "../../utils/UserAPI";
 import { AuthContext } from "../../context/AuthContext";
 import "./SignUp.css";
 import Icon from "../assets/bugIcon.png";
+import Icon2 from "../assets/bugIconWhite.png";
 import { Link } from "react-router-dom";
 
 
@@ -45,48 +46,50 @@ const renderWarningMsg = () => {
 }
 
     return (
-<div>
-            <div className="circle2 animate__animated animate__rotateOutDownRight animate__delay-1s">
-            <img className="bugIcon2" src={Icon} alt=""/>       
-            </div>
+      <div>
+          <div className="circle2 animate__animated animate__rotateOutDownRight animate__delay-1s">
+            <img className="bugIcon2" src={Icon2} alt=""/>       
+          </div>
 
-<div className="form">
-<form className="signup-form" onSubmit={handleSubmit}>
-  {message.msgBody && !message.msgError ? renderSuccessMsg() : message.msgBody && message.msgError 
-  ? renderWarningMsg() : null}
-<div className="form-group">
-    <label for="firstName">First Name</label>
-    <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={handleChange} />
-  </div>
-  <div className="form-group">
-    <label for="lastName">Last Name</label>
-    <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={handleChange}/>
-  </div>
-  <div className="form-group">
-    <label for="exampleInputEmail1">Email</label>
-    <input type="email" className="form-control" name="email" value={user.email} onChange={handleChange}/>
-  </div>
-  <div className="form-group">
-    <label for="lastName">Username</label>
-    <input type="text" className="form-control" name="username" value={user.username} onChange={handleChange}/>
-  </div>
-  <div className="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" className="form-control" name="password" value={user.password} onChange={handleChange}/>
-  </div>
-  <button type="submit" className="btn btn-primary">Sign Up</button>
-</form>
-</div>
-<div style={{textAlign: "center"}}>
-        <h1 className="socialTitle">Social Bug
-        {/* <i className="fas fa-bug"></i> */}
-        <img className="bugIcon" src={Icon} alt=""/>       
-        </h1>
-        <p style={{textAlign: "center", fontWeight: "bold"}}>Already have an account? Click here to Login!</p>
-        <Link to="/">
-        <a href="#"><button className="btn btn-primary">Login</button></a>
-        </Link>
-        </div>
+          <div className="titleContainer" style={{textAlign: "center"}}>
+            <h1 className="socialTitle">Social Bug
+            {/* <i className="fas fa-bug"></i> */}
+            <img className="bugIcon" src={Icon} alt=""/>       
+            </h1>
+            <p className="subtitle" style={{textAlign: "center", fontWeight: "bold"}}>Already have an account? Click here to Login!</p>
+            <Link to="/">
+              <a href="#"><button className="btn btn-primary">Login</button></a>
+            </Link>
+          </div>
+
+          <div className="form">
+            <form className="signup-form" onSubmit={handleSubmit}>
+              {message.msgBody && !message.msgError ? renderSuccessMsg() : message.msgBody && message.msgError 
+              ? renderWarningMsg() : null}
+            <div className="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={handleChange} />
+              </div>
+              <div className="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={handleChange}/>
+              </div>
+              <div className="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" className="form-control" name="email" value={user.email} onChange={handleChange}/>
+              </div>
+              <div className="form-group">
+                <label for="lastName">Username</label>
+                <input type="text" className="form-control" name="username" value={user.username} onChange={handleChange}/>
+              </div>
+              <div className="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" className="form-control" name="password" value={user.password} onChange={handleChange}/>
+              </div>
+              <button type="submit" className="btn btn-primary">Sign Up</button>
+            </form>
+          </div>
+
 </div>
     )
 }
