@@ -20,8 +20,8 @@
     border-radius: 50%;
     position: absolute;
     z-index: 1;
-    background-color: #61dafb;
-    right: -246px;
+    background-color: rgb(5, 117, 230);
+    right: -320px;
     top: 43px;
     text-align: center;
     overflow: hidden;
@@ -35,5 +35,12 @@
 @media screen and (max-width:768px) {
     .signup-form {
         width: 100%;
+        padding: 0 0px 0px 76px;
+    }
+    .subtitle {
+        margin: 0 70px 20px;
+    }
+    .circle2 {
+        display: none;
     }
 }
