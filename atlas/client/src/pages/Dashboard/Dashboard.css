@@ -11,6 +11,19 @@
     grid-template-columns: 1fr;
 }
 
+.feed-filter {
+    display: grid;
+    grid-template-columns: .2fr .2fr;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.feed-btn {
+    background-color: white;
+    border: none;
+    /* border-bottom: 3px solid grey; */
+}
 .card {
     width: 350px;
     height: 500px;
@@ -59,7 +72,9 @@
 .card-body {
     text-align: left;
 }
-
+.tweet-card-body {
+    padding: 0;
+}
 .engagement {
     font-size: 15px;
     display: grid;

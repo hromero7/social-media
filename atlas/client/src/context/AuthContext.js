@@ -10,6 +10,7 @@ export default ({ children }) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
+
     useEffect(() => {
         UserAPI.isAuthenticated().then(data => {
             console.log(data.user)

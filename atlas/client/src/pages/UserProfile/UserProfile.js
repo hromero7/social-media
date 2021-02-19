@@ -50,6 +50,7 @@ const UserProfile = (props) => {
                     likes={post.likes}
                     postId={post._id}
                     avatar={post.avatar}
+                    date={post.date}
                     />
             }) : <div>No Posts</div>    }
         </div>

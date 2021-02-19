@@ -1,13 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import PostAPI from "../utils/PostAPI";
 import UserAPI from "../utils/UserAPI";
 import { PostContext } from "../context/PostContext";
 import { AuthContext } from "../context/AuthContext";
-
+import { MessageContext} from "../context/MessageContext";
 
 const PostCard = (props) => {
   const { user, setUser, setFollowing } = useContext(AuthContext);
   const { setPosts, setSinglePost, setLikes, setComments, postImage, setPostImage } = useContext(PostContext);
+  const { setMessage } = useContext(MessageContext);
   const [iconClass, setIconClass] = useState({ isHovered: false });
 
   useEffect(() => {
@@ -54,6 +56,8 @@ const PostCard = (props) => {
     PostAPI.deletePost(props.postId).then(data => {
       console.log(data);
       props.history.push("/dashboard");
+      setMessage(data);
+      setTimeout(() => setMessage(null), 4000);
       PostAPI.getPosts().then(data => {
         setPosts(data);
       })
@@ -86,7 +90,9 @@ const PostCard = (props) => {
     <div className="card mb-3 tweet-card">
         <div className="row no-gutters">
     <div className="col-md-4">
+      <Link to={`/user/profile/${props.userId}`}>
       <img src={postImage} className="card-img tweet-img" alt="..."/>
+      </Link>
     </div>
     <div className="col-md-8">
       <div className="card-body">

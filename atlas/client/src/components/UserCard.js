@@ -2,10 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import Modal from "./Modal";
 import UserAPI from "../utils/UserAPI";
 import { AuthContext } from "../context/AuthContext";
+import UserFollowerModal from "./UserFollowerModal";
+import UserFollowingModal from "./UserFollowingModal";
 
 const UserCard = (props) => {
   const { user } = useContext(AuthContext);
-
     return (
         <div className="card user-profile">
         <img
@@ -20,12 +21,14 @@ const UserCard = (props) => {
            {props.bio}
           </p>
             <div className="user-followers">
-          <p className="card-text">
-            <span>Following:</span> {props.following === undefined? 0 : props.following.length}
-          </p>
-          <p className="card-text">
-            <span>Followers:</span> {props.followers === undefined? 0 : props.followers.length }
-          </p>
+          <a className="card-text">
+            <UserFollowingModal username={props.username}/>
+            {/* <span>Following:</span> {props.following === undefined? 0 : props.following.length} */}
+          </a>
+          <a className="card-text">
+            <UserFollowerModal username={props.username}/>
+            {/* <span>Followers:</span> {props.followers === undefined? 0 : props.followers.length } */}
+          </a>
           </div>
           <div className="card-btn">
             {user._id === props.userId ? <Modal/> : null}

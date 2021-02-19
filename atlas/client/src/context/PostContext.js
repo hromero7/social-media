@@ -4,6 +4,7 @@ export const PostContext = createContext();
 
 export default ({ children }) => {
     const [posts, setPosts] = useState([]);
+    const [followingPosts, setFollowingPosts] = useState([]);
     const [myPosts, setMyPosts] = useState([]);
     const [singlePost, setSinglePost] = useState([]);
     const [likes, setLikes] = useState([]);
@@ -16,6 +17,8 @@ export default ({ children }) => {
             <PostContext.Provider value={{ 
                 posts, 
                 setPosts,
+                followingPosts,
+                setFollowingPosts,
                 myPosts,
                 setMyPosts, 
                 singlePost, 
