@@ -16,25 +16,25 @@ const ProfileCard = () => {
   
 
     return (
-        <div className="card profile-card">
+        <div className="card profile-card user-profile">
         <img
           src={`data:image/jpeg;base64,${user.avatar}`}
           className="card-img-top profile-card-top"
           alt="profile"
         />
-        <div className="card-body">
+        <div className="card-body profile-card-body">
           <h1 className="card-text name">{user.firstName} {user.lastName}</h1>
           <h1 className="card-text username">@{user.username}</h1>
-          <p className="card-text">
-            <span>Bio:</span> {user.bio}
+          <p className="card-text profile-bio">
+            {user.bio}
           </p>
         <div className="user-followers">
-          <a className="card-text">
-            <FollowingModal following={following}/>
+          <a className="card-text follower-text">
+            <FollowingModal username={user.username} following={following}/>
             {/* <span>Following:</span> {following === undefined? 0 : following.length} */}
           </a>
-          <a className="card-text">
-          <FollowerModal followers={followers}/>
+          <a className="card-text follower-text">
+          <FollowerModal username={user.username} followers={followers}/>
             {/* <span>Followers:</span> {followers === undefined? 0 : followers.length } */}
           </a>
         </div>

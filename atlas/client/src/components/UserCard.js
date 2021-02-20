@@ -17,7 +17,7 @@ const UserCard = (props) => {
         <div className="card-body profile-card-body">
           <h1 className="card-text name">{props.firstName} {props.lastName}</h1>
           <h2 className="card-text username">@{props.username}</h2>
-          <p className="card-text">
+          <p className="card-text profile-bio">
            {props.bio}
           </p>
             <div className="user-followers">
