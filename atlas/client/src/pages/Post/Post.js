@@ -53,6 +53,7 @@ const Post = (props) => {
                 postId={singlePost._id}
                 userId={singlePost.userId}
                 history={props.history}
+                date={singlePost.date}
                 /> 
         <div>
             <form className="form-group" onSubmit={handleSubmit}>
@@ -70,6 +71,7 @@ const Post = (props) => {
                     commentId={comment._id}
                     avatar={comment.avatar}
                     userId={comment.userId}
+                    date={comment.date}
                     />
             })
         }

@@ -37,6 +37,16 @@
     margin: auto;
 }
 
+.dashboard .profile-card {
+    width: 100%;
+    border-bottom: none;
+    
+}
+
+/* .dashboard .tweet-card {
+    width: 575px;
+    height: 200px;
+} */
 .card-body {
     text-align: center;
     
@@ -102,4 +112,76 @@
 
 .fa-trash-alt {
     color: red;
+}
+
+@media screen and (max-width: 846px) {
+    .dashboard .follower-text {
+        font-size: .8rem;
+    }
+
+    .dashboard .profile-card-top {
+        width: 150px;
+        height: 150px;
+    }
+
+    .dashboard .profile-bio {
+        font-size: .8rem;
+    }
+
+    .dashboard .tweet-card {
+        width: 500px;
+    }
+
+    .dashboard .tweet-img {
+        width: 125px;
+        height: 125px;
+
+    }
+}
+
+@media screen and (max-width: 755px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard .profile-card-top {
+        width: 200px;
+        height: 200px;
+    }
+
+    .dashboard .profile-card {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .dashboard .tweet-card {
+        width: 100%;
+    }
+    .dashboard .profile-card {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 435px) {
+    .dashboard .tweet-img {
+        width: 80px;
+        height: 80px;
+
+    }
+
+    .dashboard .profile-card {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    .dashboard .card-btn {
+        margin-top: 10px;
+    }
+
+    .feed-filter {
+        grid-template-columns: .3fr .3fr;
+    }
 }

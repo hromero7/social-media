@@ -18,7 +18,7 @@ useEffect(() => {
           Followers: {props.followers === undefined? 0 : props.followers.length}
         </a>
         <div className="modal fade" id="followerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog">
+          <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">Followers</h5>
@@ -26,7 +26,8 @@ useEffect(() => {
                 </button>
               </div>
               <div className="modal-body">
-                {followers.map((follower, i) => {
+                {followers.length === 0? `${props.username} is currently not followed by anyone`
+                : followers.map((follower, i) => {
                     return (
                         <FollowerCard
                         key={i} 

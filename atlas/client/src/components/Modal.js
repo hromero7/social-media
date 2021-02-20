@@ -32,7 +32,7 @@ const Modal = () => {
 <div>
 <button type="button" className="btn" data-toggle="modal" data-target="#exampleModal"><i className="far fa-edit"></i></button>
 <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div className="modal-dialog">
+  <div className="modal-dialog modal-dialog-centered">
     <div className="modal-content">
       <div className="modal-header">
         <h5 className="modal-title" id="exampleModalLabel">Create new post</h5>

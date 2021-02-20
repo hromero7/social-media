@@ -1,0 +1,46 @@
+.follower-card-body {
+    padding: 0;
+    margin-left: 15px;
+}
+
+.follower-card {
+    height: auto;
+}
+
+@media screen and (max-width: 500px) {
+    .follower-card-img {
+        width: 125px;
+        height: 125px;
+    }
+
+    .follower-card-name {
+        font-size: 1rem;
+    }
+
+    .follower-card-username {
+        font-size: 1rem;
+    }
+
+    .follower-card-bio {
+        font-size: .7rem;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .follower-card-img {
+        width: 80px;
+        height: 80px;
+    }
+    .follower-card-name {
+        font-size: .8rem;
+    }
+
+    .follower-card-username {
+        font-size: .8rem;
+    }
+
+    .follower-card-bio {
+        font-size: .5rem;
+    }
+
+}

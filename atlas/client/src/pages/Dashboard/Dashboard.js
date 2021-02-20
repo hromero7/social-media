@@ -33,7 +33,7 @@ const Dashboard = () => {
 
     return (
 
-        <div className="container dashboard animate__animated">
+        <div className="dashboard">
         <div>
             <ProfileCard/>
         </div>

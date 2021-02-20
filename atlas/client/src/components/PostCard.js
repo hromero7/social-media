@@ -5,6 +5,7 @@ import UserAPI from "../utils/UserAPI";
 import { PostContext } from "../context/PostContext";
 import { AuthContext } from "../context/AuthContext";
 import { MessageContext} from "../context/MessageContext";
+import Moment from "react-moment";
 
 const PostCard = (props) => {
   const { user, setUser, setFollowing } = useContext(AuthContext);
@@ -95,22 +96,23 @@ const PostCard = (props) => {
       </Link>
     </div>
     <div className="col-md-8">
-      <div className="card-body">
+      <div className="card-body tweet-card-body">
       <div className="delete-btn">
-      { props.userId === user._id ? <button className="engagement-btn" onClick={handleDelete}><i className="fas fa-trash-alt"></i></button> : null}
+      <Moment local format="MM/DD/YY hh:mm A" style={{fontSize:"10px"}}>{props.date}</Moment>
+      { props.userId === user._id ? <button className="engagement-btn user-engagement" onClick={handleDelete}><i className="fas fa-trash-alt"></i></button> : null}
       {
         user.following === undefined ? null 
         : user.following.find((follow) => follow.id === props.userId) ?
-        <button className="engagement-btn" onClick={handleUnfollowUser} onMouseEnter={toggleIconClass} onMouseLeave={toggleIconFalse}>
+        <button className="engagement-btn user-engagement" onClick={handleUnfollowUser} onMouseEnter={toggleIconClass} onMouseLeave={toggleIconFalse}>
           <i class={iconClass.isHovered? "fas fa-user-times" : "fas fa-user-check"} style={iconClass.isHovered? {color: "red"} : {color: "blue"}}></i>
         </button> 
         : props.userId !== user._id ?  
-        <button className="engagement-btn" onClick={handleFollowUser}><i class="fas fa-user-plus" style={{color: "green"}}></i></button> 
+        <button className="engagement-btn user-engagement" onClick={handleFollowUser}><i class="fas fa-user-plus" style={{color: "green"}}></i></button> 
         : null
       }
       </div>
         {/* <button className="engagement-btn delete-btn"><i className="fas fa-trash-alt" style={{color: "red"}}></i></button> */}
-        <h5 className="card-title">{props.user}</h5>
+        <h5 className="card-title">@{props.user}</h5>
         <p className="card-text">{props.body}</p>
         <div className="engagement">
           <button className="engagement-btn" onClick={handleLikeBtn}>

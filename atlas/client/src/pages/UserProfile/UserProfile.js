@@ -24,7 +24,7 @@ const UserProfile = (props) => {
 
     return (
 
-        <div className="container dashboard">
+        <div className="user-profile-container">
         
         <div>
             <UserCard 
@@ -39,7 +39,7 @@ const UserProfile = (props) => {
                 />
         </div>
         
-        <div className="feed">
+        <div className="profile-feed">
             {userPosts.length > 0 ? userPosts.map((post, i) => {
                return <TweetCard
                     key={i} 

@@ -7,9 +7,15 @@
 }
 
 .user-profile {
-    margin-right: 20px; 
+    margin-top: 30px;
+    margin-bottom: 30px; 
     height: auto;
     width: auto; 
+    border: none;
+    border-bottom: 2px solid grey;
+    width: 55%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .profile-card-body {
@@ -19,4 +25,110 @@
 .user-followers {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+.user-profile-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* width: 55%; */
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.profile-feed {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+}
+
+.profile-tweet {
+    width: 575px;
+    margin: auto;
+}
+
+.user-engagement {
+    text-align: end;
+}
+
+@media screen and (max-width: 780px) {
+    .user-profile {
+        width: 80%;
+    }
+
+    .profile-tweet {
+        /* font-size: 1rem; */
+        width: 500px;
+        
+    }
+
+    .tweet-img-profile {
+        width: 125px;
+        height: 125px;
+    }
+
+    .col-md-4 {
+        max-width: 33.33%; 
+        flex: 0 0 33.33%;
+    }
+
+    .col-md-8 {
+        max-width: 66.67%;
+        flex: 0 0 66.67%;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+    .tweet-img-profile {
+        width: 100px;
+        height: 100px;
+    }
+    .profile-tweet {
+        width: 85%;
+        font-size: 14px;
+    }
+
+}
+
+@media screen and (max-width: 412px) {
+    .tweet-img-profile {
+        width: 75px;
+        height: 75px;
+        margin-top: 30px;
+    }
+
+    .profile-tweet {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 337px) {
+    .tweet-img-profile {
+        width: 60px;
+        height: 60px;
+        margin-top: 30px;
+    }
+    .fa-trash-alt {
+        margin: 0;
+    }
+
+    .name {
+        font-size: 1.2rem;
+    }
+    .username {
+        font-size: 1rem;
+    }
+
+    .profile-bio {
+        font-size: 1rem;
+    }
+
+    .user-followers {
+        font-size: .8rem;
+    }
+
 }

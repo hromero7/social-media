@@ -3,6 +3,8 @@ import ProfileCard from "../../components/ProfileCard";
 import TweetCard from "../../components/TweetCard";
 import PostAPI from "../../utils/PostAPI";
 import { PostContext } from "../../context/PostContext";
+import "./Profile.css";
+
 const Profile = () => {
     const { myPosts, setMyPosts, posts } = useContext(PostContext);
     useEffect(() => {
@@ -14,7 +16,7 @@ const Profile = () => {
 
     return (
 
-        <div className="container dashboard">
+        <div className="user-profile-container">
         
         <div>
             <ProfileCard/>
@@ -31,8 +33,9 @@ const Profile = () => {
                     likes={post.likes}
                     postId={post._id}
                     avatar={post.avatar}
+                    date={post.date}
                     />
-            }) : <div>No Posts</div>    }
+            }) : <div className="feed">No Posts</div>    }
         </div>
 
         </div>
