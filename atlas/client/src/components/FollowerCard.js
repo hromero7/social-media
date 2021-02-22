@@ -24,7 +24,7 @@ const FollowerCard = (props) => {
   const handleFollowUser = () => {
     let followId = { followId: props.userId }
     UserAPI.followUser(followId).then(data => {
-      console.log(data);
+      // console.log(data);
       UserAPI.isAuthenticated().then(data => {
             setUser(data.user)
             setFollowing(data.user.following);
@@ -36,7 +36,7 @@ const FollowerCard = (props) => {
   const handleUnfollowUser = () => {
     let unfollowId = { unfollowId: props.userId }
     UserAPI.unfollowUser(unfollowId).then(data => {
-      console.log(data)
+      // console.log(data)
       UserAPI.isAuthenticated().then(data => {
         setUser(data.user)
         setFollowing(data.user.following)

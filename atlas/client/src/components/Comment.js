@@ -17,8 +17,8 @@ const Comment = (props) => {
       setIconClass({ isHovered: false });
     }
     const handleLikeBtn = () => {
-        console.log(props.commentId);
-        console.log(singlePost._id)
+        // console.log(props.commentId);
+        // console.log(singlePost._id)
         if (props.likes.find((like) => like.id === user._id)) {
             const like = props.likes.find((like) => like.id === user._id)
             PostAPI.removeCommentLike(singlePost._id, props.commentId, like._id).then(data => {
@@ -42,7 +42,7 @@ const Comment = (props) => {
 
     const handleDelete = () => {
         PostAPI.deleteComment(singlePost._id, props.commentId).then(data => {
-            console.log(data);
+            // console.log(data);
             PostAPI.getSinglePost(singlePost._id).then(data => {
                 setSinglePost(data);
                 setComments(data.comments);
@@ -54,7 +54,7 @@ const Comment = (props) => {
   const handleFollowUser = () => {
     let followId = { followId: props.userId }
     UserAPI.followUser(followId).then(data => {
-      console.log(data);
+      // console.log(data);
       UserAPI.isAuthenticated().then(data => {
             setUser(data.user)
             setFollowing(data.user.following);
@@ -66,7 +66,7 @@ const Comment = (props) => {
   const handleUnfollowUser = () => {
     let unfollowId = { unfollowId: props.userId }
     UserAPI.unfollowUser(unfollowId).then(data => {
-      console.log(data)
+      // console.log(data)
       UserAPI.isAuthenticated().then(data => {
         setUser(data.user)
         setFollowing(data.user.following)
@@ -74,11 +74,11 @@ const Comment = (props) => {
     })
   }
     return (
-        <div className="card mb-3 tweet-card">
+        <div className="card mb-3 tweet-card profile-tweet">
         <div className="row no-gutters">
     <div className="col-md-4">
       <Link to={`/user/profile/${props.userId}`}>
-      <img src={`data:image/jpeg;base64,${props.avatar}`} className="card-img tweet-img" alt="..."/>
+      <img src={`data:image/jpeg;base64,${props.avatar}`} className="card-img tweet-img tweet-img-profile" alt="..."/>
       </Link>
     </div>
     <div className="col-md-8">

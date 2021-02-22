@@ -7,6 +7,13 @@
     height: auto;
 }
 
+.profile-message {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
 @media screen and (max-width: 500px) {
     .follower-card-img {
         width: 125px;

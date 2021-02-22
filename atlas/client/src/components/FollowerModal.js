@@ -8,7 +8,7 @@ const [followers, setFollowers] = useState([]);
 useEffect(() => {
     UserAPI.getFollowersList().then(data => {
         setFollowers(data);
-        console.log(data)
+        // console.log(data)
     })
   },[]);
 

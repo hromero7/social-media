@@ -16,8 +16,8 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 
 function App() {
   const { user, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
-  console.log(user);
-  console.log(isAuthenticated);
+  // console.log(user);
+  // console.log(isAuthenticated);
   return (
     <Router>
       <div>

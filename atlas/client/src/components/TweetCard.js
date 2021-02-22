@@ -12,11 +12,7 @@ const TweetCard = (props) => {
   const { posts, setPosts, setMyPosts, setFollowingPosts } = useContext(PostContext);
   const { setMessage } = useContext(MessageContext);
   const [iconClass, setIconClass] = useState({ isHovered: false });
-  // useEffect(() => {
-  //   UserAPI.isAuthenticated().then(data => {
-  //     setUser(data.user)
-  //   })
-  // },[])
+  
   const toggleIconClass = () => {
     setIconClass({ isHovered: true });
   }
@@ -27,7 +23,7 @@ const TweetCard = (props) => {
     if (props.likes.find((like) => like.id === user._id)) {
       const like = props.likes.find((like) => like.id === user._id)
       PostAPI.removeLike(props.postId, like._id).then(data => {
-        console.log(data)
+        // console.log(data)
         PostAPI.getPosts().then(data => {
           setPosts(data);
           PostAPI.getMyPosts().then(data => {
@@ -40,7 +36,7 @@ const TweetCard = (props) => {
       })
     } else {
       PostAPI.likePost(props.postId).then(data => {
-        console.log(data)
+        // console.log(data)
         PostAPI.getPosts().then(data => {
           setPosts(data);
           PostAPI.getMyPosts().then(data => {
@@ -56,7 +52,7 @@ const TweetCard = (props) => {
 
   const handleDelete = () => {
     PostAPI.deletePost(props.postId).then(data => {
-      console.log(data);
+      // console.log(data);
       setMessage(data);
       setTimeout(() => setMessage(null), 4000);
       PostAPI.getPosts().then(data => {
@@ -69,7 +65,7 @@ const TweetCard = (props) => {
   const handleFollowUser = () => {
     let followId = { followId: props.userId }
     UserAPI.followUser(followId).then(data => {
-      console.log(data);
+      // console.log(data);
       UserAPI.isAuthenticated().then(data => {
             setUser(data.user)
             setFollowing(data.user.following);
@@ -81,7 +77,7 @@ const TweetCard = (props) => {
   const handleUnfollowUser = () => {
     let unfollowId = { unfollowId: props.userId }
     UserAPI.unfollowUser(unfollowId).then(data => {
-      console.log(data)
+      // console.log(data)
       UserAPI.isAuthenticated().then(data => {
         setUser(data.user)
         setFollowing(data.user.following)

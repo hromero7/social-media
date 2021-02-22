@@ -13,7 +13,7 @@ export default ({ children }) => {
 
     useEffect(() => {
         UserAPI.isAuthenticated().then(data => {
-            console.log(data.user)
+            // console.log(data.user)
             setUser(data.user);
             setFollowers(data.user.followers);
             setFollowing(data.user.following);

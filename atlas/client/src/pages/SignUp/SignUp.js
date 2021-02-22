@@ -23,7 +23,7 @@ const SignUp = () => {
     e.preventDefault();
     UserAPI.register(user).then(data => {
       const { message } = data;
-      console.log(message);
+      // console.log(message);
       setMessage(message);
       resetForm();
      
@@ -46,19 +46,16 @@ const renderWarningMsg = () => {
 }
 
     return (
-      <div>
+      <div className="signupContainer">
           <div className="circle2 animate__animated animate__rotateOutDownRight animate__delay-1s">
             <img className="bugIcon2" src={Icon2} alt=""/>       
           </div>
 
           <div className="titleContainer" style={{textAlign: "center"}}>
-            <h1 className="socialTitle">Social Bug
-            {/* <i className="fas fa-bug"></i> */}
-            <img className="bugIcon" src={Icon} alt=""/>       
-            </h1>
+            <h1 className="socialTitle">Social Bug</h1>
             <p className="subtitle" style={{textAlign: "center", fontWeight: "bold"}}>Already have an account? Click here to Login!</p>
             <Link to="/">
-              <a href="#"><button className="btn btn-primary">Login</button></a>
+              <button className="btn btn-primary">Login</button>
             </Link>
           </div>
 

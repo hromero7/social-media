@@ -8,7 +8,6 @@ import { PostContext } from "../../context/PostContext";
 import { MessageContext } from "../../context/MessageContext";
 import Message from "../../components/Message";
 
-
 const Dashboard = () => {
     const { posts, setPosts, followingPosts, setFollowingPosts } = useContext(PostContext);
     const { message, setMessage } = useContext(MessageContext);
@@ -16,7 +15,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         PostAPI.getPosts().then(data => {
-          console.log(data)
+          // console.log(data)
           setPosts(data);
           PostAPI.getFollowingPosts().then(data => {
             setFollowingPosts(data);
@@ -40,8 +39,8 @@ const Dashboard = () => {
         
         <div className="feed">
           <div className="feed-filter">
-            <button className="feed-btn" onClick={() => setShowGlobalPosts(true)}>Global</button> 
-            <button className="feed-btn" onClick={() => setShowGlobalPosts(false)}>Following</button>
+            <button className={showGlobalPosts? "btn-active" : "feed-btn"} onClick={() => setShowGlobalPosts(true)}>Global</button> 
+            <button className={showGlobalPosts === false? "btn-active" : "feed-btn"} onClick={() => setShowGlobalPosts(false)}>Following</button>
           </div>
            { message ? <Message/> : null }
             {showGlobalPosts? posts.map((post, i) => {

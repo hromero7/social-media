@@ -8,7 +8,7 @@ const [following, setFollowing] = useState([]);
 useEffect(() => {
     UserAPI.getFollowingList().then(data => {
         setFollowing(data);
-        console.log(data)
+        // console.log(data)
     })
   },[]);
 
