@@ -35,7 +35,7 @@ const Profile = () => {
                     avatar={post.avatar}
                     date={post.date}
                     />
-            }) : <div className="feed">No Posts</div>    }
+            }) : <div className="profile-message">This user has not made any posts yet.</div>    }
         </div>
 
         </div>

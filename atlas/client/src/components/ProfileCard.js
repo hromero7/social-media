@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import Modal from "./Modal";
 import UserAPI from "../utils/UserAPI";
 import { AuthContext } from "../context/AuthContext";
@@ -7,13 +7,6 @@ import FollowingModal from "./FollowingModal";
 
 const ProfileCard = () => {
   const { user, followers, following } = useContext(AuthContext);
-  // const [user,setUser] = useState("");
-  // useEffect(() => {
-  //   UserAPI.getImage(user._id).then(data => {
-  //     setUserImage(data);
-  // })
-  // },[])
-  
 
     return (
         <div className="card profile-card user-profile">

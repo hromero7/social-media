@@ -6,7 +6,8 @@
     width: 50%;
     /* margin: auto; */
     float: left;
-    padding-left: 150px;
+    /* padding-left: 150px; */
+    padding: 0 90px;
     margin-top: 30px;
     /* border: #61dafb solid 3px; */
     /* border-radius: 10px; */
@@ -35,12 +36,30 @@
 @media screen and (max-width:768px) {
     .signup-form {
         width: 100%;
-        padding: 0 0px 0px 76px;
+        /* padding: 0 0px 0px 76px; */
+        /* padding: 0 40px; */
+    }
+    .signupContainer {
+        display: grid;
+        align-items: center;
+        justify-content: center;
     }
     .subtitle {
         margin: 0 70px 20px;
     }
     .circle2 {
         display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .signup-form {
+        padding: 0 40px;
+    }
+}
+
+@media screen and (max-width: 345px) {
+    .signupContainer .subtitle {
+        font-size: .8rem;
     }
 }

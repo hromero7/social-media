@@ -1,0 +1,21 @@
+.comment-form {
+    width: 575px;
+    margin: auto;
+}
+.post-btn {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+@media screen and (max-width: 846px) {
+    .comment-form {
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .comment-form {
+        width: 95%;
+    
+    }
+}

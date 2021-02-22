@@ -15,24 +15,6 @@ const NavBar = (props) => {
     });
   }
 
-  const logoutStyle = {
-    position : "absolute",
-    right: "1%"
-  }
-  const profileStyle = {
-    position : "absolute",
-    right: "15.5%"
-  }
-  const dashStyle = {
-    position : "absolute",
-    right: "22%"
-  }
-
-  const settingStyle = {
-    position: "absolute",
-    right: "8%"
-  }
-
   //Nav items that will populate when user is not logged in
   const unauthenticatedNavBar = () => {
     return (
@@ -52,22 +34,22 @@ const NavBar = (props) => {
     return (
     <div className="navbar-nav">
           <Link to="/dashboard">
-            <a className="nav-link" style={dashStyle} href="#">Dashboard <i className="fas fa-list"></i></a>
+            <a className="nav-link" href="#">Dashboard <i className="fas fa-list"></i></a>
           </Link>
           <Link to="/profile">
-            <a className="nav-link" style={profileStyle} href="#">Profile <i className="far fa-user"></i></a>
+            <a className="nav-link" href="#">Profile <i className="far fa-user"></i></a>
           </Link>
           <Link to="/settings">
-            <a className="nav-link" style={settingStyle} href="#">Settings <i className="fas fa-cog"></i></a>
+            <a className="nav-link" href="#">Settings <i className="fas fa-cog"></i></a>
           </Link>
-          <button className="btn btn-primary" style={logoutStyle} onClick={logoutHandler}>Logout</button>
+          <button className="btn btn-primary" onClick={logoutHandler}>Logout</button>
         </div>
     );
   }
 
     return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        {/* <a className="navbar-brand" href="#">Social Bug</a> */}
+    <nav className="navbar navbar-expand-lg navbar-light">
+        <a className="navbar-brand social-brand-name" href="#">Social Bug</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
         </button>

@@ -30,23 +30,23 @@ const PostCard = (props) => {
       const like = props.likes.find((like) => like.id === user._id);
   
       PostAPI.removeLike(props.postId, like._id).then(data => {
-        console.log(data)
+        // console.log(data)
         PostAPI.getSinglePost(props.postId).then(data => {
             setSinglePost(data);
             setComments(data.comments)
             setLikes(data.likes);
-            console.log(data);
+            // console.log(data);
   
           })
       })
     } else {
       PostAPI.likePost(props.postId).then(data => {
-        console.log(data)
+        // console.log(data)
         PostAPI.getSinglePost(props.postId).then(data => {
             setSinglePost(data);
             setComments(data.comments)
             setLikes(data.likes);
-            console.log(data);
+            // console.log(data);
   
           })
       });
@@ -55,7 +55,7 @@ const PostCard = (props) => {
 
   const handleDelete = () => {
     PostAPI.deletePost(props.postId).then(data => {
-      console.log(data);
+      // console.log(data);
       props.history.push("/dashboard");
       setMessage(data);
       setTimeout(() => setMessage(null), 4000);
@@ -68,7 +68,7 @@ const PostCard = (props) => {
   const handleFollowUser = () => {
     let followId = { followId: props.userId }
     UserAPI.followUser(followId).then(data => {
-      console.log(data);
+      // console.log(data);
       UserAPI.isAuthenticated().then(data => {
             setUser(data.user)
             setFollowing(data.user.following);
@@ -80,7 +80,7 @@ const PostCard = (props) => {
   const handleUnfollowUser = () => {
     let unfollowId = { unfollowId: props.userId }
     UserAPI.unfollowUser(unfollowId).then(data => {
-      console.log(data)
+      // console.log(data)
       UserAPI.isAuthenticated().then(data => {
         setUser(data.user)
         setFollowing(data.user.following)
@@ -88,11 +88,11 @@ const PostCard = (props) => {
     })
   }
     return (
-    <div className="card mb-3 tweet-card">
+    <div className="card mb-3 tweet-card profile-tweet">
         <div className="row no-gutters">
     <div className="col-md-4">
       <Link to={`/user/profile/${props.userId}`}>
-      <img src={postImage} className="card-img tweet-img" alt="..."/>
+      <img src={postImage} className="card-img tweet-img tweet-img-profile" alt="..."/>
       </Link>
     </div>
     <div className="col-md-8">

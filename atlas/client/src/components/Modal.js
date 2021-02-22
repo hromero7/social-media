@@ -7,9 +7,11 @@ const Modal = () => {
     const { posts, setPosts } = useContext(PostContext)
     const { message, setMessage } = useContext(MessageContext);
     const [newPost, setNewPost] = useState({ body: "" });
+    const [charCount, setCharCount] = useState(100);
 
     const handleChange = (e) => {
         setNewPost({ [e.target.name]: e.target.value });
+        setCharCount(100 - e.target.value.length);
     }
     
     const resetPostForm = () => {
@@ -44,11 +46,12 @@ const Modal = () => {
         <form>
           <div className="form-group">
             <label for="message-text" className="col-form-label">What's on your mind?</label>
-            <textarea className="form-control" id="message-text" name="body" value={newPost.body} onChange={handleChange}></textarea>
+            <textarea className="form-control" id="message-text" name="body" value={newPost.body} onChange={handleChange} maxLength="100"></textarea>
           </div>
         </form>
       </div>
       <div className="modal-footer">
+        <p>Characters remaining: {charCount}</p>
         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={handleClick}>Post</button>
       </div>

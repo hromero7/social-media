@@ -45,15 +45,11 @@ const Login = (props) => {
 
     return(
         <div className="loginContainer">
-
             <div className="titleContainer" style={{textAlign: "center"}}>
-                <h1 className="socialTitle">Social Bug
-                    {/* <i className="fas fa-bug"></i> */}
-                    <img className="bugIcon" src={Icon} alt=""/>       
-                </h1>
+                <h1 className="socialTitle">Social Bug</h1>
                 <p style={{textAlign: "center", fontWeight: "bold"}}>New here? Click here to sign up!</p>
                 <Link to="/signup">
-                    <a href="#"><button className="btn btn-primary">Get Started</button></a>
+                    <button className="btn btn-primary">Get Started</button>
                 </Link>
             </div>
 
@@ -61,26 +57,19 @@ const Login = (props) => {
             <img className="bugIcon2" src={Icon2} alt=""/>       
             </div>
             
-        <div className=" loginPage">
-            
-            
+        <div className="loginPage">
             <form className="loginForm" onSubmit={handleSubmit}>
                 {invalidCredentials === true ? renderWarningMsg() : null }
-            <div className="form-group">
-            <label>Username</label>
-            <input type="text" className="form-control" name="username" onChange={handleChange}/>
-            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-            <div className="form-group">
-            <label>Password</label>
-            <input type="password" className="form-control" name="password" onChange={handleChange}/>
-        </div>
-            <div className="form-group form-check">
-            <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-            <label className="form-check-label">Check me out</label>
-        </div>
-  <button type="submit" className="btn btn-primary">Login</button>
-</form>
+                <div className="form-group">
+                    <label>Username</label>
+                    <input type="text" className="form-control" name="username" onChange={handleChange}/>
+                </div>
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password" className="form-control" name="password" onChange={handleChange}/>
+                </div>
+                <button type="submit" className="btn btn-primary">Login</button>
+            </form>
 
         </div>
         

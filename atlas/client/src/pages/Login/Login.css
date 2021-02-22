@@ -5,12 +5,17 @@ html, body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.loginContainer {
-    /* width: 100%; */
-}
+
+/* .loginContainer {
+    width: 100%;
+} */
 
 .loginPage {
     margin-top: 20px;
+}
+
+.loginContainer .form-control {
+    width: 70%;
 }
 
 /*Heading*/
@@ -21,6 +26,16 @@ html, body {
     background: linear-gradient(to left, rgb(0, 242, 96), rgb(5, 117, 230));
     float: left;
     margin-top: 30px;
+    -webkit-background-clip: text;
+    background-clip: none;
+    -webkit-text-fill-color: transparent;
+    user-select: none;
+    padding: 5px;
+}
+.social-brand-name {
+    font-family: 'Damion', cursive, sans-serif;
+    font-size: 1.6rem;
+    background: linear-gradient(to left, rgb(0, 242, 96), rgb(5, 117, 230));
     -webkit-background-clip: text;
     background-clip: none;
     -webkit-text-fill-color: transparent;
@@ -72,10 +87,6 @@ html, body {
 
 /*form*/
 
-.form-control {
-    width: 70%;
-}
-
 .loginForm {
     width: 50%;
     float: right;
@@ -87,24 +98,48 @@ html, body {
     /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
+@media screen and (max-width: 900px) {
+    .loginContainer .form-control {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 800px) {
+    .socialTitle {
+        font-size: 5.5rem;
+    }
+}
 
 @media screen and (max-width:768px) {
     .titleContainer {
         width: 100%;
+    }
+    .loginContainer {
+        display: grid;
+        align-items: center;
+        justify-content: center;
     }
     .loginForm {
         width: 100%;
         /* float: none; */
         padding: 0 40px;
     }
+    /* .loginContainer .form-control {
+        width: 40%;
+    } */
     .socialTitle {
-        font-size: 3rem;
+        font-size: 5.5rem;
     }
     .circle {
         display: none;
     }
     .bugIcon2 {
         width: 450px;
-    margin: 3px 0px 3px 56px;
+        margin: 3px 0px 3px 56px;
+    }
+}
+
+@media screen and (max-width: 368px) {
+    .socialTitle {
+        font-size: 4rem;
     }
 }

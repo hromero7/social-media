@@ -4,17 +4,19 @@ import PostCard from "../../components/PostCard";
 import Comment from "../../components/Comment";
 import PostAPI from "../../utils/PostAPI";
 import { PostContext } from "../../context/PostContext";
+import "./Post.css";
 
 const Post = (props) => {
     const { singlePost, setSinglePost, likes, setLikes, comments, setComments } = useContext(PostContext);
     const [newComment, setNewComment] = useState({ body: "" });
+    const [charCount, setCharCount] = useState(100);
 
     useEffect(() => {
         PostAPI.getSinglePost(props.match.params.id).then(data => {
           setSinglePost(data);
           setComments(data.comments)
           setLikes(data.likes);
-          console.log(data);
+        //   console.log(data);
 
         })
       },[])
@@ -25,6 +27,7 @@ const Post = (props) => {
 
     const handleChange = (e) => {
        setNewComment({ [e.target.name]: e.target.value });
+       setCharCount(100 - e.target.value.length);
     }
 
     const handleSubmit = (e) => {
@@ -38,7 +41,7 @@ const Post = (props) => {
     }
     return (
 
-        <div className="container dashboard">
+        <div className="dashboard">
         
         <div>
             <ProfileCard/>
@@ -56,9 +59,11 @@ const Post = (props) => {
                 date={singlePost.date}
                 /> 
         <div>
-            <form className="form-group" onSubmit={handleSubmit}>
-                <input type="text" className="form-control" placeholder="Add a comment..." name="body" value={newComment.body} onChange={handleChange}/>
-                <button type="submit" className="btn btn-primary">Post</button>
+            <form className="form-group comment-form" onSubmit={handleSubmit}>
+                <p>Characters remaining: {charCount}</p>
+                <textarea type="text" className="form-control" placeholder="Add a comment..." name="body" value={newComment.body} onChange={handleChange} maxLength="100"/>
+                <button type="submit" className="btn btn-primary post-btn">Post</button>
+                
             </form>
         </div>
         {

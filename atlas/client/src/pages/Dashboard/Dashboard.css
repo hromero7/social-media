@@ -18,6 +18,12 @@
     justify-content: center;
     align-items: center;
 }
+.btn-active {
+    background-color: rgb(5, 117, 230);
+    border: none;
+    color: white;
+    border-radius: 1rem;
+}
 
 .feed-btn {
     background-color: white;
@@ -43,10 +49,9 @@
     
 }
 
-/* .dashboard .tweet-card {
-    width: 575px;
-    height: 200px;
-} */
+.dashboard .tweet-card {
+    height: auto;
+}
 .card-body {
     text-align: center;
     
@@ -66,6 +71,12 @@
     font-size: 28px;
 }
 
+/* .dashboard .profile-bio {
+    width: 20%;
+    font-size: .2rem;
+    margin: auto;
+
+} */
 /***** Tweet Card CSS *******/
 
 .tweet-card {

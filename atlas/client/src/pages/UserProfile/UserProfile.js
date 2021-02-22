@@ -16,7 +16,7 @@ const UserProfile = (props) => {
           setUserPosts(data.posts);
           UserAPI.getUser(props.match.params.userId).then(data => {
               setUserCard(data);
-              console.log(data)
+            //   console.log(data)
           })
         })
       },[posts])
@@ -52,7 +52,7 @@ const UserProfile = (props) => {
                     avatar={post.avatar}
                     date={post.date}
                     />
-            }) : <div>No Posts</div>    }
+            }) : <div className="profile-message">This user has not made any posts yet.</div>    }
         </div>
 
         </div>

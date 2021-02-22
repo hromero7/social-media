@@ -7,10 +7,10 @@ const UserFollowingModal = (props) => {
 const [following, setFollowing] = useState([]);
 useEffect(() => {
     let id = window.location.pathname.split("/");
-    console.log(id[3])
+    // console.log(id[3])
     UserAPI.getUserFollowing(id[3]).then(data => {
         setFollowing(data);
-        console.log(data)
+        // console.log(data)
     })
   },[]);
 

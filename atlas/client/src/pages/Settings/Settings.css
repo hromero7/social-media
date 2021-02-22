@@ -1,11 +1,176 @@
 .settings {
     margin-top: 70px;
+    padding: 20px;
 }
-
+.mobile-settings {
+    display: none;
+}
 .tab-content {
     text-align: center;
 }
 
-.nav-pills {
+/* .nav-pills {
     width: 20px;
+} */
+
+/* .nav-pills a {
+    margin: 20px;
+} */
+
+.settings-img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.settings .col-9 {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.settings .file-input {
+    margin-top: 20px;
+}
+
+.settings .upload-btn {
+    width: 100px;
+    margin-top: 10px ;
+}
+
+.settings .file-label {
+    display: grid;
+    place-items: start;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.settings .bio-label {
+    display: grid;
+    place-items: start;
+    font-size: 1rem;
+    font-weight: bold;
+    /* margin-top: 20px; */
+}
+
+.settings .count-label {
+    display: grid;
+    place-items: start;
+    font-size: 1rem;
+    /* font-weight: bold; */
+    margin-top: 20px;
+}
+
+.settings .bio-text {
+    /* margin: 30px; */
+    width: 440px;
+    margin-bottom: 20px;
+}
+
+.settings .bio-group {
+   margin-left: 30px;
+
+}
+
+.settings .contact-container {
+    display: grid;
+    place-items: center;
+}
+
+.settings .contact-info-horacio {
+    display: grid;
+    grid-template-columns: 1fr .2fr;
+}
+
+.settings .contact-info-austin {
+    display: grid;
+    grid-template-columns: 1fr .3fr;
+}
+
+.settings .contact-heading {
+    font-family: 'Damion', cursive, sans-serif;
+    font-size: 3rem;
+}
+
+.settings .contact-content {
+    font-size: 1.2rem;
+}
+
+.settings .fa-linkedin {
+    font-size: 2rem;
+}
+
+input[type=file] {
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 982px) {
+    input[type=file] {
+        font-size: .8rem;
+    }
+}
+
+@media screen and (max-width: 775px) {
+    .settings {
+        margin: auto;
+        text-align: center;
+        max-width: 100%;
+    }
+    .settings .row {
+        display: none;
+    }
+    .mobile-settings {
+        display: grid;
+    }
+    input[type=file] {
+        font-size: .7rem;
+    }
+    .mobile-settings .bio-label {
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 492px) {
+    .mobile-settings .bio-text {
+        width: 100%;
+    }
+    .mobile-settings .contact-heading {
+        font-size: 2rem;
+    }
+    .mobile-settings .contact-content {
+        font-size: 1rem;
+    }
+    .mobile-settings .name {
+        font-size: 1rem;
+        margin-right: 10px;
+    }
+    .mobile-settings .fa-linkedin {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 405px) {
+    .settings .row {
+        display: none;
+    }
+    .settings-img{
+        width: 100px;
+        height: 100px;
+    }
+    .settings .file-label {
+        font-size: .7rem;
+    }
+    .settings .upload-btn {
+        margin-top: 20px ;
+    }
+
+    .mobile-settings .bio-label {
+        font-size: .8rem;
+    }
+
+    .mobile-settings .count-label {
+        font-size: .8rem;
+    }
+
 }

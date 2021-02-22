@@ -7,10 +7,10 @@ const UserFollowerModal = (props) => {
 const [followers, setFollowers] = useState([]);
 useEffect(() => {
     let id = window.location.pathname.split("/");
-    console.log(id[3])
+    // console.log(id[3])
     UserAPI.getUserFollowers(id[3]).then(data => {
         setFollowers(data);
-        console.log(data)
+        // console.log(data)
     })
   },[]);
 
