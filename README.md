@@ -16,7 +16,7 @@ Screenshots of the completed application are below:
 **Main Page**
 ![](./atlas/client/public/socialbug-home.png)
 
-**Dashboard*
+**Dashboard**
 ![](./atlas/client/public/dashboard.png)
 
 **Profile**
