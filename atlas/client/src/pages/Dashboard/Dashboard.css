@@ -40,6 +40,8 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 50%;
     margin: auto;
 }
 
@@ -88,6 +90,8 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 50%;
 }
 
 .card-body {

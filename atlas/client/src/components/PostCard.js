@@ -92,7 +92,7 @@ const PostCard = (props) => {
         <div className="row no-gutters">
     <div className="col-md-4">
       <Link to={`/user/profile/${props.userId}`}>
-      <img src={postImage} className="card-img tweet-img tweet-img-profile" alt="..."/>
+      <img src={`data:image/jpeg;base64,${props.avatar}`} className="card-img tweet-img tweet-img-profile" alt="..."/>
       </Link>
     </div>
     <div className="col-md-8">

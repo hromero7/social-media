@@ -50,6 +50,7 @@ const Post = (props) => {
         <div className="feed">
         <PostCard
                 body={singlePost.body}
+                avatar={singlePost.avatar}
                 user={singlePost.username}
                 comments={comments}
                 likes={likes}
