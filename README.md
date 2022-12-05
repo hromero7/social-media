@@ -3,7 +3,7 @@
 This social media app lets you stay connected with friends and even meet new ones. Share your thoughts to the world and see what others are saying. Sign up today and join the conversation! Built with React, JavaScript, JSX, Mongoose, MongoDB, JSON Web Token, Passport, HTML, CSS.
 
 You can access the deployed application here:
-[https://socialbug.herokuapp.com/](https://socialbug.herokuapp.com/)
+[https://socialbug-production-c057.up.railway.app/](https://socialbug-production-c057.up.railway.app/)
 
 ## The Challenge
 
